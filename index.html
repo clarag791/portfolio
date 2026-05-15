@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clara Gelas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#080b10;--void:#0c1018;--graph:#141a24;--slate:#1c2535;
+  --mist:#9E9488;--pearl:#D8D1C6;--white:#F0EAE2;
+  --gold:#C09A5B;--gold-lt:#D4AE72;--gold-pale:#EAD5A8;
+  --abyss:#060f1d;--odk:#0a2438;--omd:#133d58;--olt:#1e6282;--foam:#3d9ab5;
+  --g1:#F8F2E6;--g2:#EDE0C4;--g3:#D4B483;--g4:#C09A5B;--g5:#8C6D1F;
+  --b1:#0A1E2E;--b2:#132D45;--b3:#1C4068;--b4:#2E6899;--b5:#4D93C4;--b6:#C2DCF0;
+  --bp-serif:'Cormorant Garamond',serif;--bp-mono:'Space Mono',monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--white);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;}
+
+
+
+body::after{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.025;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.8rem 4rem;display:flex;justify-content:space-between;align-items:center;}
+nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,11,16,.93) 0%,transparent 100%);z-index:-1;pointer-events:none;}
+.nav-mark{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;letter-spacing:.12em;color:var(--gold-lt);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-size:.58rem;font-weight:400;letter-spacing:.35em;text-transform:uppercase;color:var(--mist);text-decoration:none;transition:color .3s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .4s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after{width:100%;}
+
+/* HERO */
+#hero{height:100vh;min-height:700px;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
+.video-bg{position:absolute;inset:0;overflow:hidden;}
+.video-bg video{width:100%;height:100%;object-fit:cover;object-position:center;}
+.video-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,15,29,.45) 0%,rgba(8,11,16,.2) 40%,rgba(6,15,29,.55) 75%,rgba(6,15,29,.85) 100%);}
+.biolum{position:absolute;inset:0;pointer-events:none;}
+.bio-dot{position:absolute;border-radius:50%;animation:bioPulse ease-in-out infinite;}
+@keyframes bioPulse{0%,100%{opacity:0;transform:scale(.5);}50%{opacity:.6;transform:scale(1.2);}}
+.hero-ticker{position:absolute;bottom:0;left:0;right:0;z-index:5;height:44px;overflow:hidden;border-top:1px solid rgba(192,154,91,.2);background:rgba(8,11,16,.7);backdrop-filter:blur(8px);display:flex;align-items:center;}
+.ticker-track{display:flex;white-space:nowrap;animation:ticker 32s linear infinite;}
+.ticker-track span{font-size:.53rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);padding:0 2.5rem;opacity:.65;}
+.ticker-sep{color:var(--foam);opacity:.4;}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.hero-content{position:relative;z-index:4;width:100%;display:grid;grid-template-columns:1fr 1fr;padding:0 5rem 6rem;gap:4rem;align-items:end;animation:heroIn 1.6s cubic-bezier(.22,1,.36,1) .2s both;}
+@keyframes heroIn{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+.hero-eyebrow{font-size:.56rem;letter-spacing:.55em;text-transform:uppercase;color:var(--gold);margin-bottom:1.8rem;display:flex;align-items:center;gap:1.2rem;}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold);}
+.hero-name{font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(4rem,8.5vw,8rem);line-height:.9;letter-spacing:-.02em;}
+.hero-name .first{color:var(--white);display:block;}
+.hero-name .last{color:var(--gold-lt);font-style:italic;display:block;}
+.hero-monogram{font-family:'Playfair Display',serif;font-size:clamp(5rem,10vw,9rem);font-weight:400;font-style:italic;color:transparent;-webkit-text-stroke:1px rgba(192,154,91,.2);letter-spacing:-.05em;line-height:1;position:absolute;right:4rem;top:50%;transform:translateY(-50%);z-index:3;animation:fadeIn 2s ease .8s both;pointer-events:none;user-select:none;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.hero-right-col{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:.5rem;}
+.manifesto-label{font-size:.48rem;letter-spacing:.5em;text-transform:uppercase;color:var(--foam);opacity:.5;margin-bottom:1.2rem;}
+.manifesto-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(1rem,1.8vw,1.45rem);line-height:1.75;color:var(--pearl);opacity:.72;border-left:1px solid rgba(192,154,91,.3);padding-left:1.5rem;}
+.hero-cta{margin-top:2.5rem;display:flex;align-items:center;gap:1.5rem;}
+.btn-gold{font-size:.56rem;font-weight:400;letter-spacing:.35em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:.82rem 2.1rem;text-decoration:none;transition:background .3s,transform .3s;display:inline-block;}
+.btn-gold:hover{background:var(--gold-lt);transform:translateY(-2px);}
+.btn-ghost{font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--mist);text-decoration:none;display:flex;align-items:center;gap:.7rem;transition:color .3s;}
+.btn-ghost:hover{color:var(--white);}
+.btn-ghost::after{content:'↓';}
+
+/* SHARED */
+.wrap{max-width:1160px;margin:0 auto;padding:0 4rem;}
+section{position:relative;}
+.s-label{font-size:.53rem;font-weight:400;letter-spacing:.55em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+.s-label::after{content:'';flex:0 0 50px;height:1px;background:var(--gold);opacity:.4;}
+.s-title{font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(2rem,4.5vw,3.5rem);line-height:1.05;color:var(--white);margin-bottom:3rem;}
+.s-title em{font-style:italic;color:var(--gold-lt);}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* AMBIENT ORBS */
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;animation:orbDrift 14s ease-in-out infinite alternate;pointer-events:none;z-index:0;}
+@keyframes orbDrift{from{transform:translate(0,0) scale(1);}to{transform:translate(var(--tx),var(--ty)) scale(var(--ts));}}
+
+/* WHO I AM */
+#whoi{padding:0;background:var(--void);}
+.who-layout{display:grid;grid-template-columns:400px 1fr;gap:0;align-items:stretch;min-height:80vh;}
+.who-photo-col{position:relative;overflow:hidden;background:var(--ink);}
+.who-photo-col .photo-img{width:100%;height:100%;object-fit:contain;object-position:bottom center;display:block;transform:translateX(-22px) translateY(22px);opacity:0;transition:transform 1.2s cubic-bezier(.22,1,.36,1),opacity 1.1s ease;filter:contrast(1.07) brightness(1.02);}
+.who-photo-col.in .photo-img{transform:translateX(0) translateY(0);opacity:1;}
+.photo-title{position:absolute;top:2.5rem;left:2.5rem;z-index:3;pointer-events:none;}
+.photo-title-who{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,4.5vw,4rem);font-weight:700;color:var(--white);line-height:1;display:block;}
+.photo-title-ami{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,4.5vw,4rem);font-weight:700;font-style:italic;color:var(--gold-lt);line-height:1;display:block;}
+.who-right-col{display:flex;flex-direction:column;border-left:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;}
+.who-profile-block{padding:3.5rem 4rem;border-bottom:1px solid rgba(255,255,255,.05);}
+.profile-label{font-size:.48rem;letter-spacing:.55em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;}
+.profile-label::after{content:'';flex:1;height:1px;background:var(--gold);opacity:.3;}
+.kpi-stack{display:flex;flex-direction:column;}
+.kpi-block{padding:1.8rem 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.kpi-block:last-child{border-bottom:none;}
+.kpi-num{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:400;color:var(--gold-lt);line-height:1;margin-bottom:.3rem;}
+.kpi-lbl{font-size:.48rem;letter-spacing:.32em;text-transform:uppercase;color:var(--mist);opacity:.6;}
+.who-about-block{padding:3.5rem 4rem;flex:1;}
+.about-label{font-size:.48rem;letter-spacing:.55em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;}
+.about-label::after{content:'';flex:1;height:1px;background:var(--gold);opacity:.3;}
+.who-about-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,2.8vw,2.8rem);font-weight:400;color:var(--white);line-height:1.1;margin-bottom:2rem;}
+.who-about-title em{font-style:italic;color:var(--gold-lt);}
+.who-about-body p{font-size:.85rem;line-height:1.9;color:var(--pearl);opacity:.65;margin-bottom:1.1rem;}
+.pill-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.8rem;}
+.pill{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;padding:.38rem .95rem;border:1px solid rgba(192,154,91,.25);color:var(--gold-pale);opacity:.62;transition:all .3s;cursor:default;}
+.pill:hover{opacity:1;border-color:var(--gold);}
+.who-phrases{display:flex;flex-direction:column;margin-top:2.5rem;border-top:1px solid rgba(255,255,255,.05);}
+.phrase-item{display:flex;align-items:baseline;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.phrase-num{font-size:.46rem;letter-spacing:.3em;color:var(--gold);opacity:.5;flex-shrink:0;width:1.4rem;}
+.phrase-text{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--pearl);opacity:.45;transition:opacity .3s;}
+.phrase-item:hover .phrase-text{opacity:.85;}
+
+/* CAREER BREW */
+#career{padding:8rem 0 10rem;background:var(--graph);}
+.matcha-hero{position:absolute;top:-3rem;right:0rem;width:520px;opacity:.97;filter:drop-shadow(0 40px 70px rgba(0,0,0,.8));animation:matchaFloat 6s ease-in-out infinite;pointer-events:none;z-index:1;}
+@keyframes matchaFloat{0%,100%{transform:translateY(0) rotate(-4deg);}50%{transform:translateY(-18px) rotate(3deg);}}
+.career-header{position:relative;z-index:2;margin-bottom:4rem;}
+.receipts-col{display:flex;flex-direction:column;gap:2.5rem;position:relative;z-index:2;max-width:620px;}
+.receipt{background:#f5f0e8;color:#1a1a1a;position:relative;padding:0;opacity:0;transform:translateY(24px);transition:all .7s ease;box-shadow:0 8px 40px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2);}
+.receipt.in{opacity:1;transform:translateY(0);}
+.receipt:hover{transform:translateY(-4px) rotate(.3deg);box-shadow:0 20px 60px rgba(0,0,0,.45);}
+.receipt::before{content:'';display:block;height:18px;background:linear-gradient(135deg,var(--graph) 33.33%,transparent 33.33%) 0 0,linear-gradient(225deg,var(--graph) 33.33%,transparent 33.33%) 0 0;background-color:#f5f0e8;background-size:18px 18px;background-repeat:repeat-x;}
+.receipt::after{content:'';display:block;height:18px;background:linear-gradient(315deg,var(--graph) 33.33%,transparent 33.33%) 0 0,linear-gradient(45deg,var(--graph) 33.33%,transparent 33.33%) 0 0;background-color:#f5f0e8;background-size:18px 18px;background-repeat:repeat-x;}
+.receipt-inner{padding:1.6rem 1.8rem;}
+.r-company{font-family:'Courier New',monospace;font-weight:700;font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;text-align:center;color:#1a1a1a;display:flex;align-items:center;justify-content:center;gap:.7rem;margin-bottom:.3rem;}
+.r-company::before,.r-company::after{content:'★';font-size:.55rem;opacity:.5;}
+.r-location{font-family:'Courier New',monospace;font-size:.6rem;letter-spacing:.15em;text-align:center;color:#666;margin-bottom:1.2rem;}
+.r-sep{border:none;border-top:1px dashed rgba(0,0,0,.2);margin:.9rem 0;}
+.r-role{font-family:'Courier New',monospace;font-weight:700;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#1a1a1a;margin-bottom:.3rem;}
+.r-meta{display:flex;justify-content:space-between;font-family:'Courier New',monospace;font-size:.55rem;color:#888;letter-spacing:.08em;margin-bottom:.8rem;}
+.r-lines{list-style:none;display:flex;flex-direction:column;gap:.35rem;}
+.r-line{display:flex;justify-content:space-between;align-items:baseline;font-family:'Courier New',monospace;font-size:.6rem;color:#333;letter-spacing:.05em;}
+.r-check{color:#1a1a1a;font-size:.65rem;}
+.r-impact{display:flex;justify-content:space-between;align-items:center;font-family:'Courier New',monospace;font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#1a1a1a;margin-top:.8rem;}
+.r-impact-val{font-weight:700;}
+.r-barcode{margin:1rem auto .3rem;height:36px;width:100%;background:repeating-linear-gradient(90deg,#1a1a1a 0px,#1a1a1a 2px,transparent 2px,transparent 4px,#1a1a1a 4px,#1a1a1a 5px,transparent 5px,transparent 8px,#1a1a1a 8px,#1a1a1a 11px,transparent 11px,transparent 13px,#1a1a1a 13px,#1a1a1a 14px,transparent 14px,transparent 17px,#1a1a1a 17px,#1a1a1a 20px,transparent 20px,transparent 22px,#1a1a1a 22px,#1a1a1a 23px,transparent 23px,transparent 26px,#1a1a1a 26px,#1a1a1a 29px,transparent 29px,transparent 31px,#1a1a1a 31px,#1a1a1a 32px,transparent 32px,transparent 35px);}
+.r-footer{font-family:'Courier New',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;text-align:center;color:#aaa;padding-bottom:.3rem;}
+
+/* EDUCATION — BOARDING PASSES */
+#education{padding:9rem 0;background:var(--void);}
+.bp-stack{display:flex;flex-direction:column;gap:1.5rem}
+.bp{display:grid;grid-template-columns:1fr auto;border-radius:10px;overflow:visible;position:relative;filter:drop-shadow(0 8px 40px rgba(0,0,0,.4));transition:transform .4s ease,filter .4s ease;cursor:default;}
+.bp:hover{transform:scale(1.012) translateY(-4px);filter:drop-shadow(0 18px 60px rgba(0,0,0,.55))}
+.bp-main{border-radius:10px 0 0 10px;padding:2rem 2.5rem;position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr auto;gap:2rem;align-items:center;}
+.bp-main::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 500' opacity='0.07'%3E%3Cellipse cx='180' cy='230' rx='140' ry='120' fill='currentColor'/%3E%3Cellipse cx='500' cy='200' rx='200' ry='130' fill='currentColor'/%3E%3Cellipse cx='780' cy='220' rx='170' ry='120' fill='currentColor'/%3E%3Cellipse cx='900' cy='320' rx='80' ry='60' fill='currentColor'/%3E%3Cellipse cx='300' cy='380' rx='60' ry='40' fill='currentColor'/%3E%3C/svg%3E");background-size:cover;background-position:center;pointer-events:none;}
+.bp-stub{width:180px;border-radius:0 10px 10px 0;padding:1.5rem 1.5rem 1.5rem 2rem;position:relative;display:flex;flex-direction:column;justify-content:space-between;border-left:2px dashed rgba(255,255,255,.2);}
+.bp::before{content:'';position:absolute;left:calc(100% - 180px - 11px);top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;z-index:2}
+.bp-barcode{width:100%;height:36px;margin:.6rem 0;background:repeating-linear-gradient(90deg,currentColor 0,currentColor 2px,transparent 2px,transparent 4px,currentColor 4px,currentColor 5px,transparent 5px,transparent 8px);opacity:.5}
+.bp-meta-row{display:flex;gap:2rem;margin-bottom:.5rem}
+.bp-meta{display:flex;flex-direction:column}
+.bp-meta-k{font-family:var(--bp-mono);font-size:.42rem;letter-spacing:.2em;text-transform:uppercase;opacity:.5;margin-bottom:.2rem}
+.bp-meta-v{font-family:var(--bp-mono);font-size:.6rem;font-weight:700}
+.bp-route{text-align:center;position:relative;z-index:1}
+.bp-cities{font-family:var(--bp-serif);font-size:clamp(1.8rem,3vw,3rem);font-weight:700;line-height:1;display:flex;align-items:center;gap:.8rem;justify-content:center}
+.bp-plane{font-size:1.2rem;opacity:.7}
+.bp-boarding{font-family:var(--bp-mono);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin-top:.4rem}
+.bp-left{position:relative;z-index:1}
+.bp-degree{font-family:var(--bp-mono);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;opacity:.6;margin-bottom:.6rem}
+.bp-degtitle{font-family:var(--bp-serif);font-size:1rem;font-weight:700;line-height:1.2;margin-bottom:.3rem}
+.bp-right-desc{position:relative;z-index:1;text-align:right}
+.bp-stub-pass{font-family:var(--bp-mono);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;opacity:.5;margin-bottom:.3rem}
+.bp-stub-name{font-family:var(--bp-serif);font-size:.95rem;font-weight:700;line-height:1.2;margin-bottom:.5rem}
+.bp-stub-keys{display:flex;flex-direction:column;gap:.2rem}
+.bp-stub-key{font-family:var(--bp-mono);font-size:.42rem;letter-spacing:.08em;text-transform:uppercase;opacity:.35}
+.bp-from-to{display:flex;justify-content:space-between;font-family:var(--bp-mono);font-size:.48rem}
+.bp-from-to span{display:flex;flex-direction:column}
+.bp-from-to .fk{font-size:.38rem;letter-spacing:.15em;text-transform:uppercase;opacity:.45;margin-bottom:.1rem}
+.bp-from-to .fv{font-weight:700}
+.bp-1 .bp-main{background:linear-gradient(135deg,#B8912A 0%,#D4B483 40%,#EDE0C4 100%);color:#0A1E2E}
+.bp-1 .bp-stub{background:#8C6D1F;color:#F8F2E6}
+.bp-1::before{background:#F8F2E6;box-shadow:0 0 0 3px #8C6D1F}
+.bp-2 .bp-main{background:linear-gradient(135deg,#0A1E2E 0%,#1C4068 50%,#2E6899 100%);color:#F8F2E6}
+.bp-2 .bp-stub{background:#071626;color:#C2DCF0}
+.bp-2::before{background:#0A1E2E;box-shadow:0 0 0 3px #4D93C4}
+.bp-3 .bp-main{background:linear-gradient(135deg,#0A1E2E 0%,#132D45 40%,#1C4068 70%,rgba(184,145,42,.3) 100%);color:#F8F2E6}
+.bp-3 .bp-stub{background:linear-gradient(to bottom,#B8912A,#8C6D1F);color:#F8F2E6}
+.bp-3::before{background:#1C4068;box-shadow:0 0 0 3px #B8912A}
+.bp-lbl{font-family:var(--bp-mono);font-size:.5rem;letter-spacing:.38em;text-transform:uppercase;color:var(--g3);opacity:.6;display:flex;align-items:center;gap:.8rem;margin-bottom:2rem}
+.bp-lbl::after{content:'';height:1px;width:38px;background:currentColor;opacity:.3}
+.bp-sec-h{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2.8rem,5vw,6rem);line-height:.9;color:#F8F2E6;margin-bottom:3.5rem}
+.bp-sec-h em{font-style:italic;color:#B8912A}
+.bp.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease;}
+.bp.reveal.in{opacity:1;transform:translateY(0);}
+.bp.reveal.in:hover{transform:scale(1.012) translateY(-4px);}
+
+/* SKILLS */
+#skills{padding:9rem 0;background:var(--ink);position:relative;overflow:hidden;isolation:isolate;}
+#skills::after{content:'SKILLS';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:clamp(10rem,20vw,20rem);font-weight:700;letter-spacing:.05em;color:rgba(192,154,91,.04);pointer-events:none;white-space:nowrap;z-index:0;user-select:none;line-height:1;}
+.skills-wrap{position:relative;z-index:1;}
+.skills-heading{font-family:'Playfair Display',serif;font-weight:300;font-size:clamp(2.8rem,5vw,5.5rem);line-height:.9;color:var(--white);margin-bottom:.5rem;}
+.skills-heading em{font-style:italic;color:var(--gold-lt);}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:2rem;}
+.skill-block{border:1px solid rgba(255,255,255,.06);padding:2rem 2rem 2.2rem;background:rgba(255,255,255,.02);transition:border-color .3s,background .3s;position:relative;overflow:hidden;}
+.skill-block::after{content:none;}
+.skill-block:hover{border-color:rgba(192,154,91,.3);background:rgba(192,154,91,.03);}
+.skill-block-title{font-size:.52rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;display:flex;align-items:center;gap:.8rem;position:relative;z-index:1;}
+.skill-block-title::after{content:'';flex:1;height:1px;background:var(--gold);opacity:.25;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.5rem;position:relative;z-index:1;}
+.skill-tag{font-size:.53rem;letter-spacing:.15em;text-transform:uppercase;padding:.38rem .9rem;border:1px solid rgba(255,255,255,.08);color:var(--pearl);opacity:.6;transition:all .25s;cursor:default;}
+.skill-tag:hover{opacity:1;border-color:rgba(192,154,91,.4);color:var(--gold-pale);background:rgba(192,154,91,.05);}
+.lang-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem;}
+.lang-item{padding:2rem;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02);transition:border-color .3s,background .3s;position:relative;overflow:hidden;}
+.lang-item::after{content:attr(data-lang);position:absolute;bottom:-2rem;right:-1rem;font-family:'Playfair Display',serif;font-size:8rem;font-weight:700;color:transparent;-webkit-text-stroke:1px rgba(192,154,91,.06);line-height:1;pointer-events:none;transition:-webkit-text-stroke-color .3s;}
+.lang-item:hover{border-color:rgba(192,154,91,.3);background:rgba(192,154,91,.03);}
+.lang-item:hover::after{-webkit-text-stroke-color:rgba(192,154,91,.11);}
+.lang-name{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:400;color:var(--gold-lt);line-height:1;margin-bottom:.5rem;position:relative;z-index:1;}
+.lang-level{font-size:.52rem;letter-spacing:.25em;text-transform:uppercase;color:var(--mist);opacity:.6;position:relative;z-index:1;}
+
+/* SPIN TEXT */
+.spin-wrap{position:relative;width:140px;height:140px;display:flex;align-items:center;justify-content:center;}
+.spin-svg{position:absolute;inset:0;animation:spinRot 12s linear infinite;}
+@keyframes spinRot{to{transform:rotate(360deg);}}
+.spin-svg text{font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.16em;font-weight:400;}
+.spin-center{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:1;}
+@keyframes spinPulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.5);opacity:.6;}}
+
+/* CONTACT */
+#contact{position:relative;overflow:hidden;}
+.contact-base{padding:11rem 0;text-align:center;background:radial-gradient(ellipse 100% 80% at 50% 100%,rgba(26,77,107,.55) 0%,transparent 70%),linear-gradient(180deg,var(--ink) 0%,var(--abyss) 50%,#060e1a 100%);}
+.contact-over{font-size:.5rem;letter-spacing:.55em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:block;}
+.contact-h{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:400;color:var(--white);margin-bottom:1.5rem;line-height:1.05;}
+.contact-h em{font-style:italic;color:var(--gold-lt);}
+.contact-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mist);max-width:420px;margin:0 auto 3rem;line-height:1.7;font-weight:300;}
+.contact-row{display:flex;justify-content:center;align-items:stretch;gap:0;flex-wrap:wrap;margin-top:2rem;}
+.c-link{display:flex;flex-direction:column;gap:.4rem;text-decoration:none;padding:2rem 3rem;border:1px solid rgba(255,255,255,.06);transition:border-color .3s,background .3s;cursor:pointer;}
+.c-link:hover{border-color:rgba(192,154,91,.3);background:rgba(192,154,91,.04);}
+.c-link-lbl{font-size:.48rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);opacity:.62;}
+.c-link-val{font-size:.82rem;color:var(--pearl);opacity:.78;}
+.faq-section-title{font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(1.6rem,3vw,2.8rem);text-align:center;margin:4rem 0 2rem;line-height:1.1;color:var(--white);}
+.faq-section-title em{font-style:italic;color:var(--gold-lt);}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:rgba(255,255,255,.03);max-width:800px;margin:0 auto;text-align:left;}
+.faq-item{background:var(--void);padding:2rem 2.5rem;cursor:pointer!important;transition:background .3s;}
+.faq-item:hover{background:var(--graph);}
+.faq-q{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pearl);opacity:.55;margin-bottom:.6rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.faq-q::after{content:'+';color:var(--gold);opacity:.55;font-size:.9rem;flex-shrink:0;transition:transform .3s;}
+.faq-item.open .faq-q::after{transform:rotate(45deg);}
+.faq-a{font-size:.76rem;line-height:1.75;color:var(--pearl);opacity:.5;max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.faq-item.open .faq-a{max-height:200px;}
+
+footer{background:var(--ink);padding:2.2rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.04);font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.18);}
+.footer-mark{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;letter-spacing:.1em;color:rgba(192,154,91,.28);text-transform:none;}
+
+/* KIFFS */
+.kiffs-gallery{display:flex;gap:6px;height:100%;width:96%;align-items:stretch;padding:0 44px;}
+.kcol{position:relative;border-radius:16px;overflow:hidden;cursor:pointer;flex-shrink:0;transition:flex-basis .65s cubic-bezier(.4,0,.2,1),border-radius .4s ease;}
+.kcol.closed{flex-basis:58px;}.kcol.open{flex-basis:520px;cursor:default;}
+.kcol-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .65s cubic-bezier(.4,0,.2,1);}
+.kcol:hover:not(.open) .kcol-bg{transform:scale(1.04);}
+.kcol-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,rgba(0,0,0,.1) 50%,transparent 100%);transition:opacity .4s;}
+.kcol.open .kcol-overlay{opacity:.3;}
+.kcol-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-90deg);white-space:nowrap;font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#fff;opacity:1;transition:opacity .3s ease;pointer-events:none;font-family:'Montserrat',sans-serif;}
+.kcol.open .kcol-label{opacity:0;}
+.kcol-content{position:absolute;inset:0;display:flex;flex-direction:column;padding:28px 24px 24px;opacity:0;pointer-events:none;transition:opacity .3s ease .2s;overflow:hidden;}
+.kcol.open .kcol-content{opacity:1;pointer-events:auto;}
+.kclose-btn{align-self:flex-end;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.25);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0;backdrop-filter:blur(6px);}
+.kclose-btn:hover{background:rgba(0,0,0,.5);}
+.kcol-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:#fff;margin-top:12px;margin-bottom:6px;}
+.kcol-sub{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:20px;font-family:'Montserrat',sans-serif;}
+.kphoto-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;flex:1;min-height:0;}
+.kphoto-cell{border-radius:10px;overflow:hidden;background:rgba(255,255,255,.06);position:relative;}
+.kphoto-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}
+.kphoto-cell:hover img{transform:scale(1.05);}
+.kph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.18);border:1px dashed rgba(255,255,255,.1);border-radius:10px;font-family:'Montserrat',sans-serif;}
+.kphoto-grid.layout-feature .kphoto-cell:first-child{grid-row:1/3;}
+.kphoto-grid.layout-feature{grid-template-columns:1.4fr 1fr;grid-template-rows:1fr 1fr;}
+
+@media(max-width:900px){
+  nav{padding:1.5rem 2rem;}.nav-links{display:none;}.wrap{padding:0 1.8rem;}
+  .hero-content{grid-template-columns:1fr;padding:0 2rem 5.5rem;}
+  .hero-right-col{display:none;}.hero-monogram{display:none;}
+  .who-layout{grid-template-columns:1fr;}
+  .who-photo-col{height:60vh;}
+  .who-profile-block,.who-about-block{padding:2.5rem 2rem;}
+  .skills-grid,.lang-row{grid-template-columns:1fr;}
+  .faq-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:.5rem;text-align:center;}
+}
+
+/* FAQ MODERNE */
+.faq-modern{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:0;}
+.faq-modern-item{border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer;transition:background .2s;}
+.faq-modern-item:first-child{border-top:1px solid rgba(255,255,255,.08);}
+.faq-modern-item:hover{background:rgba(255,255,255,.02);}
+.faq-modern-q{display:flex;justify-content:space-between;align-items:center;padding:1.4rem 1rem;gap:2rem;}
+.faq-modern-q span:first-child{font-size:.75rem;letter-spacing:.1em;color:var(--pearl);opacity:.75;line-height:1.4;}
+.faq-modern-icon{font-size:1.2rem;color:var(--gold);opacity:.6;flex-shrink:0;transition:transform .3s,opacity .3s;}
+.faq-modern-item.open .faq-modern-icon{transform:rotate(45deg);opacity:1;}
+.faq-modern-a{font-size:.75rem;line-height:1.75;color:var(--pearl);opacity:.5;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease;padding:0 1rem;}
+.faq-modern-item.open .faq-modern-a{max-height:200px;padding:.2rem 1rem 1.4rem;}
+</style>
+</head>
+
+<body>
+
+
+<nav>
+  <span class="nav-mark">Clara Gelas</span>
+  <ul class="nav-links">
+    <li><a href="#whoi">Who I Am</a></li>
+    <li><a href="#career">Career</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#creative">Creative Projects</a></li>
+    <li><a href="#beyond">Beyond Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="assets/videos/vid_0001.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+  <div class="biolum" id="biolum"></div>
+  <div class="hero-monogram">CG</div>
+
+  <div class="hero-content" id="hero-content">
+    <div>
+      <div class="hero-eyebrow">Marketing · Communication · Project Coordination</div>
+      <h1 class="hero-name"><span class="first">Clara</span><span class="last">Gelas</span></h1>
+    </div>
+    <div class="hero-right-col">
+      <p class="manifesto-label">Manifesto</p>
+      <p class="manifesto-text">I believe great work lives at the intersection of precision and creativity — where luxury brands meet human stories, and where every detail is an intention.</p>
+      <div class="hero-cta">
+        <a href="#whoi" class="btn-gold">Discover</a>
+        <a href="#contact" class="btn-ghost">Get in touch</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-ticker"><div class="ticker-track" id="ticker"></div></div>
+</section>
+
+
+<!-- MUSIC PLAYER -->
+<section id="music-player" class="track-0">
+<style>
+#music-player{
+  position:relative;
+  background:var(--ink);
+  padding:6rem 2rem 7rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+#music-player .mp-section-label{
+  font-size:.48rem;
+  letter-spacing:.55em;
+  text-transform:uppercase;
+  color:var(--gold);
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:2.5rem;
+  position:relative;
+  z-index:2;
+}
+#music-player .mp-section-label::before,
+#music-player .mp-section-label::after{content:'';flex:1;height:1px;background:var(--gold);opacity:.3;}
+#music-player .mp-section-label::before{width:60px;}
+#music-player .mp-glow{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;transition:all 1.8s ease;opacity:0;}
+#music-player .mp-glow-1{width:500px;height:500px;top:-160px;left:-120px;background:radial-gradient(circle,rgba(232,168,124,0.16),transparent 70%);}
+#music-player .mp-glow-2{width:420px;height:420px;bottom:-120px;right:-80px;background:radial-gradient(circle,rgba(120,194,179,0.14),transparent 70%);}
+#music-player .mp-glow-3{width:460px;height:460px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(167,139,250,0.13),transparent 70%);}
+#music-player.track-0 .mp-glow-1{opacity:1;}
+#music-player.track-1 .mp-glow-2{opacity:1;}
+#music-player.track-2 .mp-glow-3{opacity:1;}
+#music-player .mp-card{width:360px;background:#16141e;border-radius:24px;padding:28px 26px 24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);transition:border-color 1s ease;z-index:2;}
+#music-player.track-0 .mp-card{border-color:rgba(232,168,124,0.22);}
+#music-player.track-1 .mp-card{border-color:rgba(120,194,179,0.22);}
+#music-player.track-2 .mp-card{border-color:rgba(167,139,250,0.22);}
+#music-player .mp-card::before{content:'';position:absolute;inset:0;border-radius:24px;pointer-events:none;transition:background 1s;}
+#music-player.track-0 .mp-card::before{background:linear-gradient(135deg,rgba(232,168,124,0.06),transparent 55%);}
+#music-player.track-1 .mp-card::before{background:linear-gradient(135deg,rgba(120,194,179,0.06),transparent 55%);}
+#music-player.track-2 .mp-card::before{background:linear-gradient(135deg,rgba(167,139,250,0.07),transparent 55%);}
+#music-player .mp-tag{display:inline-flex;align-items:center;gap:5px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,236,227,0.38);margin-bottom:14px;font-family:'Space Mono',monospace;}
+#music-player .mp-tag-dot{width:5px;height:5px;border-radius:50%;background:rgba(240,236,227,0.38);transition:background .5s;}
+#music-player.playing.track-0 .mp-tag-dot{background:#e8a87c;animation:mp-blink 2s infinite;}
+#music-player.playing.track-1 .mp-tag-dot{background:#78c2b3;animation:mp-blink 2s infinite;}
+#music-player.playing.track-2 .mp-tag-dot{background:#a78bfa;animation:mp-blink 2s infinite;}
+@keyframes mp-blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+#music-player .mp-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;line-height:1.5;color:#f0ece3;margin-bottom:18px;}
+#music-player #mp-tagline-main{transition:opacity .4s;}
+#music-player #mp-tagline-acc{transition:color .6s,opacity .4s;display:block;margin-top:6px;font-family:'Space Mono',monospace;font-style:normal;font-size:10px;letter-spacing:.02em;line-height:1.5;opacity:.9;}
+#music-player.track-0 #mp-tagline-acc{color:#e8a87c;}
+#music-player.track-1 #mp-tagline-acc{color:#78c2b3;}
+#music-player.track-2 #mp-tagline-acc{color:#a78bfa;}
+#music-player .mp-track-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+#music-player .mp-track-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);cursor:pointer;transition:border-color .4s,background .3s;position:relative;}
+#music-player .mp-track-item:hover{background:rgba(255,255,255,0.03);}
+#music-player.track-0 .mp-track-item.t0{border-color:rgba(232,168,124,0.38);background:rgba(232,168,124,0.04);}
+#music-player.track-1 .mp-track-item.t1{border-color:rgba(120,194,179,0.38);background:rgba(120,194,179,0.04);}
+#music-player.track-2 .mp-track-item.t2{border-color:rgba(167,139,250,0.38);background:rgba(167,139,250,0.04);}
+#music-player .mp-track-num{font-size:10px;color:rgba(240,236,227,0.38);width:14px;text-align:center;flex-shrink:0;transition:color .4s;font-family:'Space Mono',monospace;}
+#music-player.playing.track-0 .t0 .mp-track-num{color:#e8a87c;}
+#music-player.playing.track-1 .t1 .mp-track-num{color:#78c2b3;}
+#music-player.playing.track-2 .t2 .mp-track-num{color:#a78bfa;}
+#music-player .mp-thumb{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1px solid rgba(255,255,255,0.06);transition:border-color .5s;}
+#music-player .t0 .mp-thumb{background:linear-gradient(135deg,#2c1a10,#3d2210);}
+#music-player .t1 .mp-thumb{background:linear-gradient(135deg,#0e2420,#142e28);}
+#music-player .t2 .mp-thumb{background:linear-gradient(135deg,#1a1030,#22143e);}
+#music-player.track-0 .t0 .mp-thumb{border-color:rgba(232,168,124,0.3);}
+#music-player.track-1 .t1 .mp-thumb{border-color:rgba(120,194,179,0.3);}
+#music-player.track-2 .t2 .mp-thumb{border-color:rgba(167,139,250,0.3);}
+#music-player .mp-track-text{flex:1;min-width:0;}
+#music-player .mp-track-title{font-size:12px;color:#f0ece3;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Space Mono',monospace;}
+#music-player .mp-track-sub{font-size:9px;color:rgba(240,236,227,0.38);margin-top:2px;letter-spacing:.05em;font-family:'Space Mono',monospace;}
+#music-player .mp-mini-eq{display:flex;align-items:flex-end;gap:2px;height:14px;flex-shrink:0;}
+#music-player .mp-mini-eq span{display:block;width:2px;border-radius:1px;height:3px;transition:background .5s;}
+#music-player .t0 .mp-mini-eq span{background:rgba(232,168,124,0.3);}
+#music-player .t1 .mp-mini-eq span{background:rgba(120,194,179,0.3);}
+#music-player .t2 .mp-mini-eq span{background:rgba(167,139,250,0.3);}
+#music-player.playing.track-0 .t0 .mp-mini-eq span{background:#e8a87c;animation:mp-eq var(--d,.6s) ease-in-out infinite alternate;}
+#music-player.playing.track-1 .t1 .mp-mini-eq span{background:#78c2b3;animation:mp-eq var(--d,.6s) ease-in-out infinite alternate;}
+#music-player.playing.track-2 .t2 .mp-mini-eq span{background:#a78bfa;animation:mp-eq var(--d,.6s) ease-in-out infinite alternate;}
+@keyframes mp-eq{from{height:3px;}to{height:var(--mh,12px);}}
+#music-player .mp-progress-track{height:3px;background:rgba(255,255,255,0.07);border-radius:2px;cursor:pointer;overflow:hidden;}
+#music-player .mp-progress-fill{height:100%;border-radius:2px;width:0%;transition:width .4s linear,background 1s;}
+#music-player.track-0 .mp-progress-fill{background:linear-gradient(90deg,#c07a3e,#e8a87c);}
+#music-player.track-1 .mp-progress-fill{background:linear-gradient(90deg,#3a8a7d,#78c2b3);}
+#music-player.track-2 .mp-progress-fill{background:linear-gradient(90deg,#6d4db5,#a78bfa);}
+#music-player .mp-times{display:flex;justify-content:space-between;margin-top:5px;}
+#music-player .mp-times span{font-size:9px;color:rgba(240,236,227,0.38);font-family:'Space Mono',monospace;}
+#music-player .mp-controls{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:16px;}
+#music-player .mp-ctrl-btn{background:none;border:none;cursor:pointer;color:rgba(240,236,227,0.38);display:flex;align-items:center;justify-content:center;transition:color .2s,transform .15s;padding:4px;}
+#music-player .mp-ctrl-btn:hover{color:#f0ece3;transform:scale(1.1);}
+#music-player .mp-play-btn{width:54px;height:54px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .4s,background 1s;position:relative;}
+#music-player.track-0 .mp-play-btn{background:#e8a87c;}
+#music-player.track-1 .mp-play-btn{background:#78c2b3;}
+#music-player.track-2 .mp-play-btn{background:#a78bfa;}
+#music-player.track-0 .mp-play-btn:hover{box-shadow:0 0 28px rgba(232,168,124,0.45);}
+#music-player.track-1 .mp-play-btn:hover{box-shadow:0 0 28px rgba(120,194,179,0.45);}
+#music-player.track-2 .mp-play-btn:hover{box-shadow:0 0 28px rgba(167,139,250,0.45);}
+#music-player .mp-play-btn:active{transform:scale(.95);}
+#music-player .mp-play-btn svg{color:#0c0b10;}
+#music-player .mp-play-btn::before{content:'';position:absolute;inset:-5px;border-radius:50%;opacity:0;transition:border-color 1s;}
+#music-player.track-0 .mp-play-btn::before{border:1.5px solid #e8a87c;}
+#music-player.track-1 .mp-play-btn::before{border:1.5px solid #78c2b3;}
+#music-player.track-2 .mp-play-btn::before{border:1.5px solid #a78bfa;}
+#music-player.playing .mp-play-btn::before{animation:mp-pulse 2s ease-in-out infinite;}
+@keyframes mp-pulse{0%{opacity:.6;transform:scale(.9);}100%{opacity:0;transform:scale(1.4);}}
+#music-player .mp-volume-row{display:flex;align-items:center;gap:8px;margin-top:14px;}
+#music-player .mp-vol-icon{color:rgba(240,236,227,0.38);flex-shrink:0;}
+#music-player input[type=range]{-webkit-appearance:none;flex:1;height:2px;border-radius:1px;outline:none;cursor:pointer;}
+#music-player input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;cursor:pointer;transition:background 1s;}
+#music-player.track-0 input[type=range]::-webkit-slider-thumb{background:#e8a87c;}
+#music-player.track-1 input[type=range]::-webkit-slider-thumb{background:#78c2b3;}
+#music-player.track-2 input[type=range]::-webkit-slider-thumb{background:#a78bfa;}
+#music-player .mp-divider{height:1px;background:rgba(255,255,255,0.06);margin:16px 0 0;}
+#music-player .mp-status{display:flex;align-items:center;gap:6px;margin-top:14px;}
+#music-player .mp-status-dot{width:5px;height:5px;border-radius:50%;background:rgba(240,236,227,0.38);transition:background .5s;}
+#music-player.playing.track-0 .mp-status-dot{background:#e8a87c;animation:mp-blink 2s infinite;}
+#music-player.playing.track-1 .mp-status-dot{background:#78c2b3;animation:mp-blink 2s infinite;}
+#music-player.playing.track-2 .mp-status-dot{background:#a78bfa;animation:mp-blink 2s infinite;}
+#music-player .mp-status-text{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,236,227,0.38);transition:color .5s;font-family:'Space Mono',monospace;}
+#music-player.playing.track-0 .mp-status-text{color:#e8a87c;}
+#music-player.playing.track-1 .mp-status-text{color:#78c2b3;}
+#music-player.playing.track-2 .mp-status-text{color:#a78bfa;}
+</style>
+
+<div class="mp-glow mp-glow-1"></div>
+<div class="mp-glow mp-glow-2"></div>
+<div class="mp-glow mp-glow-3"></div>
+
+<div class="mp-section-label">Sound Ambience</div>
+
+<div class="mp-card">
+  <div class="mp-tag"><div class="mp-tag-dot"></div>sound ambience · portfolio</div>
+  <p class="mp-tagline"><span id="mp-tagline-main">A soundtrack for your reading…<br>and the rest of the desk.</span><br><span id="mp-tagline-acc" style="font-size:13px;font-style:normal;font-family:'Space Mono',monospace;"></span></p>
+  <div class="mp-track-list">
+    <div class="mp-track-item t0" onclick="mpSelectTrack(0)">
+      <span class="mp-track-num">01</span>
+      <div class="mp-thumb">🔥</div>
+      <div class="mp-track-text"><div class="mp-track-title">The Best</div><div class="mp-track-sub">Tina Turner · 1989 · Pure power</div></div>
+      <div class="mp-mini-eq"><span style="--d:.5s;--mh:13px"></span><span style="--d:.7s;--mh:8px"></span><span style="--d:.4s;--mh:11px"></span><span style="--d:.6s;--mh:6px"></span></div>
+    </div>
+    <div class="mp-track-item t1" onclick="mpSelectTrack(1)">
+      <span class="mp-track-num">02</span>
+      <div class="mp-thumb">🌊</div>
+      <div class="mp-track-text"><div class="mp-track-title">Feel It Still</div><div class="mp-track-sub">Portugal. The Man · 2017 · Indie groove</div></div>
+      <div class="mp-mini-eq"><span style="--d:.6s;--mh:10px"></span><span style="--d:.45s;--mh:14px"></span><span style="--d:.7s;--mh:7px"></span><span style="--d:.5s;--mh:12px"></span></div>
+    </div>
+    <div class="mp-track-item t2" onclick="mpSelectTrack(2)">
+      <span class="mp-track-num">03</span>
+      <div class="mp-thumb">🌃</div>
+      <div class="mp-track-text"><div class="mp-track-title">Midnight City</div><div class="mp-track-sub">M83 · 2011 · Nocturnal synthwave</div></div>
+      <div class="mp-mini-eq"><span style="--d:.55s;--mh:12px"></span><span style="--d:.8s;--mh:9px"></span><span style="--d:.4s;--mh:14px"></span><span style="--d:.65s;--mh:7px"></span></div>
+    </div>
+  </div>
+  <div class="mp-progress-track" id="mp-prog-track"><div class="mp-progress-fill" id="mp-progress"></div></div>
+  <div class="mp-times"><span id="mp-cur-time">0:00</span><span id="mp-dur-time">—:——</span></div>
+  <div class="mp-controls">
+    <button class="mp-ctrl-btn" onclick="mpPrevTrack()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4"/><line x1="5" y1="4" x2="5" y2="20"/></svg>
+    </button>
+    <button class="mp-play-btn" onclick="mpTogglePlay()">
+      <svg id="mp-icon-play" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21"/></svg>
+      <svg id="mp-icon-pause" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </button>
+    <button class="mp-ctrl-btn" onclick="mpNextTrack()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20"/><line x1="19" y1="4" x2="19" y2="20"/></svg>
+    </button>
+  </div>
+  <div class="mp-volume-row">
+    <svg class="mp-vol-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+    <input type="range" id="mp-volume" min="0" max="1" step="0.01" value="0.75">
+  </div>
+  <div class="mp-divider"></div>
+  <div class="mp-status"><div class="mp-status-dot"></div><span class="mp-status-text" id="mp-status-txt">ready · hit play ✦</span></div>
+</div>
+
+<audio id="mp-audio"></audio>
+<script>
+(function(){
+  const mpSection = document.getElementById('music-player');
+  const MP_TRACKS = [
+    {
+      src: "assets/audio/aud_0001.mp3",
+      mainHtml: 'A soundtrack for your reading…<br>and the rest of the desk.',
+      taglineHtml: '✦ &ldquo;The Best&rdquo; — Pure coincidence with what you're browsing right now…',
+      status: "On fire · Tina Turner reigns ✦"
+    },
+    {
+      src: "assets/audio/aud_0002.mp3",
+      mainHtml: 'Best enjoyed with<br>a slight smile. (Recommended.)',
+      taglineHtml: '✦ May improve your reading. (Unofficial tests.)',
+      status: "Groove on · Portugal. The Man ✦"
+    },
+    {
+      src: "assets/audio/aud_0003.mp3",
+      mainHtml: 'A soundtrack for your reading…<br>and the rest of the desk.',
+      taglineHtml: '✦ Risk of subtle chair dancing. Discreet, but real.',
+      status: "Night mode · M83 in the veins ✦"
+    }
+  ];
+
+  let mpCurrent = 0;
+  let mpIsPlaying = false;
+
+  const mpAudio    = document.getElementById('mp-audio');
+  const mpProgress = document.getElementById('mp-progress');
+  const mpCurTime  = document.getElementById('mp-cur-time');
+  const mpDurTime  = document.getElementById('mp-dur-time');
+  const mpVolInput = document.getElementById('mp-volume');
+  const mpStatusTxt= document.getElementById('mp-status-txt');
+  const mpTagAcc   = document.getElementById('mp-tagline-acc');
+
+  function mpFmt(s) {
+    if (isNaN(s)||!isFinite(s)) return '0:00';
+    const m = Math.floor(s/60);
+    return m+':'+Math.floor(s%60).toString().padStart(2,'0');
+  }
+
+  function mpUpdateSectionClass() {
+    mpSection.classList.remove('track-0','track-1','track-2');
+    mpSection.classList.add('track-'+mpCurrent);
+  }
+
+  function mpUpdateUI() {
+    mpUpdateSectionClass();
+    document.querySelectorAll('.mp-track-item').forEach(function(el,i){
+      el.classList.toggle('active', i===mpCurrent);
+    });
+    mpTagAcc.innerHTML = MP_TRACKS[mpCurrent].taglineHtml;
+    document.getElementById('mp-tagline-main').innerHTML = MP_TRACKS[mpCurrent].mainHtml;
+  }
+
+  function mpLoadTrack(idx, autoplay) {
+    mpCurrent = idx;
+    mpAudio.src = MP_TRACKS[idx].src;
+    mpAudio.volume = parseFloat(mpVolInput.value);
+    mpProgress.style.width = '0%';
+    mpCurTime.textContent = '0:00';
+    mpDurTime.textContent = '—:——';
+    mpUpdateUI();
+    if (autoplay) {
+      mpAudio.play().catch(function(){});
+      mpSetPlaying(true);
+    }
+  }
+
+  function mpSetPlaying(state) {
+    mpIsPlaying = state;
+    document.getElementById('mp-icon-play').style.display  = state ? 'none'  : 'block';
+    document.getElementById('mp-icon-pause').style.display = state ? 'block' : 'none';
+    if (state) {
+      mpSection.classList.add('playing');
+      mpStatusTxt.textContent = MP_TRACKS[mpCurrent].status;
+    } else {
+      mpSection.classList.remove('playing');
+      mpStatusTxt.textContent = 'paused · come back whenever ☽';
+    }
+  }
+
+  window.mpSelectTrack = function(idx) {
+    if (idx === mpCurrent && mpIsPlaying) return;
+    mpLoadTrack(idx, true);
+  };
+
+  window.mpTogglePlay = function() {
+    if (!mpAudio.src || mpAudio.src === window.location.href) {
+      mpLoadTrack(mpCurrent, true); return;
+    }
+    if (mpAudio.paused) {
+      mpAudio.play().catch(function(){});
+      mpSetPlaying(true);
+    } else {
+      mpAudio.pause();
+      mpSetPlaying(false);
+    }
+  };
+
+  window.mpNextTrack = function() { mpLoadTrack((mpCurrent+1)%MP_TRACKS.length, true); };
+  window.mpPrevTrack = function() {
+    if (mpAudio.currentTime > 3) { mpAudio.currentTime=0; return; }
+    mpLoadTrack((mpCurrent-1+MP_TRACKS.length)%MP_TRACKS.length, mpIsPlaying);
+  };
+
+  mpAudio.addEventListener('timeupdate', function(){
+    if (mpAudio.duration) {
+      mpProgress.style.width = (mpAudio.currentTime/mpAudio.duration*100)+'%';
+      mpCurTime.textContent = mpFmt(mpAudio.currentTime);
+    }
+  });
+  mpAudio.addEventListener('loadedmetadata', function(){ mpDurTime.textContent=mpFmt(mpAudio.duration); });
+  mpAudio.addEventListener('ended', function(){ mpNextTrack(); });
+
+  document.getElementById('mp-prog-track').addEventListener('click', function(e){
+    if (!mpAudio.duration) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    mpAudio.currentTime = ((e.clientX-r.left)/r.width)*mpAudio.duration;
+  });
+
+  mpVolInput.addEventListener('input', function(){ mpAudio.volume=parseFloat(mpVolInput.value); });
+
+  mpLoadTrack(0, false);
+})();
+</script>
+</section>
+
+<!-- WHO I AM -->
+<section id="whoi">
+  <div style="max-width:100%;padding:0;">
+    <div class="who-layout">
+      <div class="who-photo-col">
+        <div class="photo-title">
+          <span class="photo-title-who">Who</span>
+          <span class="photo-title-ami">Am I?</span>
+        </div>
+        <img class="photo-img" src="assets/images/img_0001.png" alt="Clara Gelas" />
+      </div>
+      <div class="who-right-col">
+        <div class="orb" style="width:500px;height:500px;background:#8b2020;top:-100px;left:-100px;--tx:80px;--ty:60px;--ts:1.2;animation-duration:16s;"></div>
+        <div class="orb" style="width:400px;height:400px;background:#4a1010;bottom:-80px;right:-80px;--tx:-60px;--ty:-40px;--ts:.9;animation-duration:12s;animation-delay:-4s;"></div>
+        <div class="orb" style="width:300px;height:300px;background:#cc3838;top:40%;left:55%;--tx:-40px;--ty:50px;--ts:1.1;animation-duration:18s;animation-delay:-8s;"></div>
+        <div class="who-profile-block reveal">
+          <div class="profile-label">Profile</div>
+          <div class="kpi-stack">
+            <div class="kpi-block"><div class="kpi-num">1–2</div><div class="kpi-lbl">Years of professional experience</div></div>
+            <div class="kpi-block"><div class="kpi-num">3</div><div class="kpi-lbl">Languages spoken</div></div>
+            <div class="kpi-block"><div class="kpi-num">FR · CH</div><div class="kpi-lbl">French &amp; Swiss · Based in Europe</div></div>
+            <div class="kpi-block"><div class="kpi-num">M2</div><div class="kpi-lbl">Master in Management · HEC Lausanne</div></div>
+          </div>
+        </div>
+        <div class="who-about-block reveal" style="transition-delay:.12s">
+          <div class="about-label">About</div>
+          <h3 class="who-about-title">Precision,<br><em>creativity</em><br>&amp; refinement</h3>
+          <div class="who-about-body">
+            <p>Experienced across luxury, fashion and design environments — from high-excellence manufacturing at Rolex to brand coordination and visual communication.</p>
+            <p>Driven by aesthetics, culture and impact. Whether on-site at a trade fair, managing editorial content or coordinating a high-profile event, I bring rigour and a sharp eye for what makes a brand unforgettable.</p>
+          </div>
+          <div class="pill-row">
+            <span class="pill">Project Management</span><span class="pill">Luxury</span><span class="pill">Events</span>
+            <span class="pill">Fashion &amp; Design</span><span class="pill">Brand Communication</span>
+            <span class="pill">Coordination</span><span class="pill">Digital Marketing</span>
+          </div>
+          <div class="who-phrases">
+            <div class="phrase-item"><span class="phrase-num">01</span><span class="phrase-text">Structured by precision</span></div>
+            <div class="phrase-item"><span class="phrase-num">02</span><span class="phrase-text">Driven by creativity</span></div>
+            <div class="phrase-item"><span class="phrase-num">03</span><span class="phrase-text">Inspired by culture</span></div>
+            <div class="phrase-item"><span class="phrase-num">04</span><span class="phrase-text">Rooted in luxury excellence</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER BREW -->
+<section id="career">
+  <div class="wrap" style="position:relative;">
+    <div class="orb" style="width:600px;height:600px;background:#f5d0b0;top:-150px;right:-100px;--tx:-40px;--ty:80px;--ts:1.1;animation-duration:20s;opacity:.3;"></div>
+    <div class="orb" style="width:350px;height:350px;background:#e8c0a0;bottom:0;left:-50px;--tx:50px;--ty:-30px;--ts:.85;animation-duration:14s;animation-delay:-6s;opacity:.25;"></div>
+    <img class="matcha-hero" src="assets/images/img_0002.png" alt="matcha" />
+    <div class="career-header reveal">
+      <div class="s-label">01 — Career</div>
+      <h2 class="s-title">Career <em>Brew</em></h2>
+    </div>
+    <div class="receipts-col">
+      <div class="receipt reveal" style="transition-delay:.05s">
+        <div class="receipt-inner">
+          <div class="r-company">IDLight</div><div class="r-location">Paris, France · Design &amp; Contemporary Lighting</div>
+          <hr class="r-sep"><div class="r-role">Marketing &amp; Operations</div>
+          <div class="r-meta"><span>Sep 2025 → Feb 2026</span><span>REF: MKT-001</span></div>
+          <hr class="r-sep">
+          <ul class="r-lines">
+            <li class="r-line"><span>Showroom prep &amp; client visits</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>CRM / Customer data management</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>Client communication support</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>Maison &amp; Objet Paris — Oct 2025</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>Excel reporting &amp; KPI tracking</span><span class="r-check">✓</span></li>
+          </ul>
+          <hr class="r-sep"><div class="r-impact"><span>IMPACT</span><span class="r-impact-val">High +</span></div>
+        </div>
+        <div class="r-barcode"></div><div class="r-footer">Thank you for choosing excellence</div><div style="height:4px;"></div>
+      </div>
+      <div class="receipt reveal" style="transition-delay:.12s">
+        <div class="receipt-inner">
+          <div class="r-company">Rolex</div><div class="r-location">Geneva, Switzerland · Haute Horlogerie</div>
+          <hr class="r-sep"><div class="r-role">Project Manager — Quality</div>
+          <div class="r-meta"><span>Mar 2025 → Aug 2025</span><span>REF: LUX-002</span></div>
+          <hr class="r-sep">
+          <ul class="r-lines">
+            <li class="r-line"><span>High-excellence manufacturing env.</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>Cross-team stakeholder collaboration</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>Structured information management</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>Project execution under pressure</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>Precision &amp; detail-oriented delivery</span><span class="r-check">✓</span></li>
+          </ul>
+          <hr class="r-sep"><div class="r-impact"><span>IMPACT</span><span class="r-impact-val">Premium +</span></div>
+        </div>
+        <div class="r-barcode"></div><div class="r-footer">Thank you for choosing excellence</div><div style="height:4px;"></div>
+      </div>
+      <div class="receipt reveal" style="transition-delay:.19s">
+        <div class="receipt-inner">
+          <div class="r-company">HR Bench</div><div class="r-location">Lausanne, Switzerland · HR &amp; Talent</div>
+          <hr class="r-sep"><div class="r-role">Community Manager</div>
+          <div class="r-meta"><span>Oct 2024 → Jan 2025</span><span>REF: COM-003</span></div>
+          <hr class="r-sep">
+          <ul class="r-lines">
+            <li class="r-line"><span>Newsletter writing &amp; content</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>LinkedIn strategy &amp; publishing</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>Audience engagement campaigns</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>Editorial planning &amp; calendars</span><span class="r-check">✓</span></li>
+          </ul>
+          <hr class="r-sep"><div class="r-impact"><span>IMPACT</span><span class="r-impact-val">Strong +</span></div>
+        </div>
+        <div class="r-barcode"></div><div class="r-footer">Thank you for choosing excellence</div><div style="height:4px;"></div>
+      </div>
+      <div class="receipt reveal" style="transition-delay:.26s">
+        <div class="receipt-inner">
+          <div class="r-company">Junior Entreprise</div><div class="r-location">HEC Lausanne · Student Consulting</div>
+          <hr class="r-sep"><div class="r-role">Head of Communications</div>
+          <div class="r-meta"><span>2021 → 2022</span><span>REF: COM-004</span></div>
+          <hr class="r-sep">
+          <ul class="r-lines">
+            <li class="r-line"><span>Digital communication &amp; branding</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>Marketing materials &amp; merchandise</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>Client mandates &amp; budget follow-up</span><span class="r-check">✓</span></li>
+          </ul>
+          <hr class="r-sep"><div class="r-impact"><span>IMPACT</span><span class="r-impact-val">High +</span></div>
+        </div>
+        <div class="r-barcode"></div><div class="r-footer">Thank you for choosing excellence</div><div style="height:4px;"></div>
+      </div>
+      <div class="receipt reveal" style="transition-delay:.33s">
+        <div class="receipt-inner">
+          <div class="r-company">LHC</div><div class="r-location">Lausanne, Switzerland · Pro Hockey Club</div>
+          <hr class="r-sep"><div class="r-role">VIP Hospitality Assistant</div>
+          <div class="r-meta"><span>Sep 2021 → Aug 2022</span><span>REF: VIP-005</span></div>
+          <hr class="r-sep">
+          <ul class="r-lines">
+            <li class="r-line"><span>Premium guest experience</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>On-site event coordination</span><span class="r-check">✓</span></li>
+            <li class="r-line"><span>High service standards</span><span class="r-check">✓</span></li>
+          </ul>
+          <hr class="r-sep"><div class="r-impact"><span>IMPACT</span><span class="r-impact-val">Solid +</span></div>
+        </div>
+        <div class="r-barcode"></div><div class="r-footer">Thank you for choosing excellence</div><div style="height:4px;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="wrap" style="position:relative;overflow:hidden;">
+    <div class="orb" style="width:450px;height:450px;background:#6b4020;top:10%;left:20%;--tx:60px;--ty:40px;--ts:1.15;animation-duration:15s;"></div>
+    <div class="orb" style="width:380px;height:380px;background:#2a1208;bottom:0;right:10%;--tx:-50px;--ty:-60px;--ts:.92;animation-duration:11s;animation-delay:-5s;"></div>
+    <div class="orb" style="width:250px;height:250px;background:#8a5828;top:60%;left:10%;--tx:30px;--ty:-40px;--ts:1.2;animation-duration:19s;animation-delay:-9s;"></div>
+    <div class="reveal">
+      <div class="bp-lbl">02 — Academic Journey</div>
+      <h2 class="bp-sec-h">Boarding<br><em>Passes</em></h2>
+    </div>
+    <div class="bp-stack">
+      <div class="bp bp-1 reveal" style="transition-delay:.05s">
+        <div class="bp-main">
+          <div class="bp-left">
+            <div class="bp-degree">Bachelor of Science</div>
+            <div class="bp-degtitle">Bachelor in<br>Management &amp; Marketing</div>
+            <div style="margin-top:1rem"><div class="bp-meta-row">
+              <div class="bp-meta"><div class="bp-meta-k">Date</div><div class="bp-meta-v">2019–2022</div></div>
+              <div class="bp-meta"><div class="bp-meta-k">Seat</div><div class="bp-meta-v">7</div></div>
+              <div class="bp-meta"><div class="bp-meta-k">Flight</div><div class="bp-meta-v">A1 234</div></div>
+            </div></div>
+          </div>
+          <div class="bp-route">
+            <div class="bp-cities">Rosenau <span class="bp-plane">✈</span> Lausanne</div>
+            <div class="bp-boarding">BOARDING TIME 09:00 AM</div>
+            <div style="font-family:var(--bp-mono);font-size:.48rem;letter-spacing:.1em;opacity:.55;margin-top:.5rem;text-align:center">Applied strategic thinking to operations,<br>marketing dynamics, and organizational performance.</div>
+            <div style="margin-top:.8rem;text-align:right"><div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;font-weight:700;opacity:.8">Business<br>Foundations</div></div>
+          </div>
+          <div class="bp-right-desc">
+            <div style="font-family:var(--bp-mono);font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;opacity:.6;margin-bottom:.3rem">From — To</div>
+            <div style="font-family:var(--bp-mono);font-size:.7rem;font-weight:700">France → Switzerland</div>
+          </div>
+        </div>
+        <div class="bp-stub">
+          <div><div class="bp-stub-pass">Passenger</div><div class="bp-stub-name">HEC Lausanne</div></div>
+          <div>
+            <div class="bp-stub-pass" style="margin-bottom:.4rem">Key Developments</div>
+            <div class="bp-stub-keys">
+              <div class="bp-stub-key">Quantitative &amp; strategic thinking</div>
+              <div class="bp-stub-key">Understanding market dynamics</div>
+              <div class="bp-stub-key">Marketing logic &amp; org. behavior</div>
+              <div class="bp-stub-key">International academic environment</div>
+            </div>
+          </div>
+          <div class="bp-barcode"></div>
+          <div class="bp-from-to"><span><span class="fk">From</span><span class="fv">France</span></span><span><span class="fk">To</span><span class="fv">Switzerland</span></span></div>
+        </div>
+      </div>
+      <div class="bp bp-2 reveal" style="transition-delay:.15s">
+        <div class="bp-main">
+          <div class="bp-left">
+            <div class="bp-degree" style="color:#C2DCF0">Exchange Program</div>
+            <div class="bp-degtitle">Marketing &amp;<br>Economics</div>
+            <div style="margin-top:1rem"><div class="bp-meta-row">
+              <div class="bp-meta"><div class="bp-meta-k">Date</div><div class="bp-meta-v">2022–2023</div></div>
+              <div class="bp-meta"><div class="bp-meta-k">Seat</div><div class="bp-meta-v">7</div></div>
+              <div class="bp-meta"><div class="bp-meta-k">Flight</div><div class="bp-meta-v">A1 234</div></div>
+            </div></div>
+          </div>
+          <div class="bp-route">
+            <div class="bp-cities">Lausanne <span class="bp-plane">✈</span> Atlanta</div>
+            <div class="bp-boarding">BOARDING TIME 09:00 AM</div>
+            <div style="font-family:var(--bp-mono);font-size:.48rem;letter-spacing:.1em;opacity:.55;margin-top:.5rem;text-align:center">Cross-cultural adaptability · Different approaches<br>to marketing &amp; communication · Global perspective</div>
+            <div style="margin-top:.8rem;text-align:right"><div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;font-weight:700;color:#4D93C4">Exchange<br>Year</div></div>
+          </div>
+          <div class="bp-right-desc">
+            <div style="font-family:var(--bp-mono);font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;opacity:.6;margin-bottom:.3rem">From — To</div>
+            <div style="font-family:var(--bp-mono);font-size:.7rem;font-weight:700">Switzerland → USA</div>
+          </div>
+        </div>
+        <div class="bp-stub" style="color:#C2DCF0">
+          <div><div class="bp-stub-pass">Passenger</div><div class="bp-stub-name">Agnes Scott College</div></div>
+          <div>
+            <div class="bp-stub-pass" style="margin-bottom:.4rem">Key Developments</div>
+            <div class="bp-stub-keys">
+              <div class="bp-stub-key">Strategic analysis of real business cases</div>
+              <div class="bp-stub-key">Data-driven problem solving</div>
+              <div class="bp-stub-key">Connecting marketing with business realities</div>
+            </div>
+          </div>
+          <div class="bp-barcode" style="color:#4D93C4"></div>
+          <div class="bp-from-to"><span><span class="fk">From</span><span class="fv">Switzerland</span></span><span><span class="fk">To</span><span class="fv">USA</span></span></div>
+        </div>
+      </div>
+      <div class="bp bp-3 reveal" style="transition-delay:.25s">
+        <div class="bp-main">
+          <div class="bp-left">
+            <div class="bp-degree" style="color:#D4B483">Master of Science</div>
+            <div class="bp-degtitle">Master in Management<br><span style="font-size:.85rem;opacity:.8">&amp; Marketing · Operational Strategy</span></div>
+            <div style="margin-top:1rem"><div class="bp-meta-row">
+              <div class="bp-meta"><div class="bp-meta-k">Date</div><div class="bp-meta-v">2023–2025</div></div>
+              <div class="bp-meta"><div class="bp-meta-k">Seat</div><div class="bp-meta-v">7</div></div>
+              <div class="bp-meta"><div class="bp-meta-k">Flight</div><div class="bp-meta-v">A1 234</div></div>
+            </div></div>
+          </div>
+          <div class="bp-route">
+            <div class="bp-cities">Atlanta <span class="bp-plane">✈</span> Lausanne</div>
+            <div class="bp-boarding">BOARDING TIME 09:00 AM</div>
+            <div style="font-family:var(--bp-mono);font-size:.48rem;letter-spacing:.1em;opacity:.55;margin-top:.5rem;text-align:center">Where structure meets creativity: a mindset I now<br>apply to marketing, brand environments &amp; business development.</div>
+            <div style="margin-top:.8rem;text-align:right"><div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;font-weight:700;color:#B8912A">Professional<br>Positioning</div></div>
+          </div>
+          <div class="bp-right-desc">
+            <div style="font-family:var(--bp-mono);font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;opacity:.6;margin-bottom:.3rem">From — To</div>
+            <div style="font-family:var(--bp-mono);font-size:.7rem;font-weight:700">USA → Switzerland</div>
+          </div>
+        </div>
+        <div class="bp-stub" style="color:#EDE0C4">
+          <div><div class="bp-stub-pass">Passenger</div><div class="bp-stub-name">HEC Lausanne</div></div>
+          <div>
+            <div class="bp-stub-pass" style="margin-bottom:.4rem">Key Developments</div>
+            <div class="bp-stub-keys">
+              <div class="bp-stub-key">Advanced strategic thinking</div>
+              <div class="bp-stub-key">Managing projects with analytical methods</div>
+              <div class="bp-stub-key">Integrating strategy, ops &amp; marketing</div>
+            </div>
+          </div>
+          <div class="bp-barcode" style="color:#B8912A"></div>
+          <div class="bp-from-to"><span><span class="fk">From</span><span class="fv">USA</span></span><span><span class="fk">To</span><span class="fv">Switzerland</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<!-- DOT GRID -->
+<div id="dot-grid-sep2" style="position:relative;height:440px;background:var(--ink);overflow:hidden;">
+  <canvas id="dot-canvas2" style="display:block;width:100%;height:100%;"></canvas>
+  <div style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:'Montserrat',sans-serif;font-size:.48rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(192,154,91,.3);pointer-events:none;white-space:nowrap;">Move your cursor</div>
+  <script>
+  (function(){
+    var canvas2=document.getElementById('dot-canvas2');
+    var ctx2=canvas2.getContext('2d');
+    var sep2=document.getElementById('dot-grid-sep2');
+    var dots2=[],mouse2={x:-9999,y:-9999};
+    var SPACING=28,RADIUS=1.4,INFLUENCE=120,MAX_SCALE=5;
+    function resize2(){
+      var rect=sep2.getBoundingClientRect();
+      var dpr=window.devicePixelRatio||1;
+      canvas2.width=rect.width*dpr;canvas2.height=rect.height*dpr;
+      canvas2.style.width=rect.width+'px';canvas2.style.height=rect.height+'px';
+      ctx2.scale(dpr,dpr);
+      dots2=[];var pw=rect.width,ph=rect.height;
+      for(var x=SPACING/2;x<pw;x+=SPACING)
+        for(var y=SPACING/2;y<ph;y+=SPACING)
+          dots2.push({x:x,y:y,scale:1});
+    }
+    function draw2(){
+      var rect=sep2.getBoundingClientRect();
+      ctx2.clearRect(0,0,rect.width,rect.height);
+      for(var i=0;i<dots2.length;i++){
+        var d=dots2[i];
+        var dx=mouse2.x-d.x,dy=mouse2.y-d.y;
+        var dist=Math.sqrt(dx*dx+dy*dy);
+        var factor=Math.max(0,1-dist/INFLUENCE);
+        d.scale+=(1+factor*(MAX_SCALE-1)-d.scale)*.15;
+        var r=RADIUS*d.scale;
+        var alpha=.28+factor*.65;
+        ctx2.beginPath();ctx2.arc(d.x,d.y,r,0,Math.PI*2);
+        ctx2.fillStyle='rgba(255,255,255,'+alpha+')';ctx2.fill();
+      }
+      requestAnimationFrame(draw2);
+    }
+    sep2.addEventListener('mousemove',function(e){
+      var rect=sep2.getBoundingClientRect();
+      mouse2.x=e.clientX-rect.left;mouse2.y=e.clientY-rect.top;
+    });
+    sep2.addEventListener('mouseleave',function(){mouse2.x=-9999;mouse2.y=-9999;});
+    window.addEventListener('resize',resize2);
+    resize2();draw2();
+  })();
+  </script>
+</div>
+
+<section id="skills">
+  <div class="wrap skills-wrap">
+    <div class="reveal">
+      <div class="s-label">03 — Skills</div>
+      <h2 class="skills-heading">Skills &amp;<br><em>Tools</em></h2>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2vw,1.5rem);font-weight:300;color:var(--pearl);opacity:.55;margin-top:1rem;margin-bottom:0;letter-spacing:.04em;">What I bring</p>
+    </div>
+    <div class="skills-grid" style="margin-top:3rem;">
+      <div class="skill-block reveal" style="transition-delay:.05s">
+        <div class="skill-block-title">Marketing &amp; Brand</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Fashion Marketing</span><span class="skill-tag">Brand Communication</span>
+          <span class="skill-tag">Luxury Environments</span><span class="skill-tag">CRM</span>
+          <span class="skill-tag">KPI Reporting</span><span class="skill-tag">Client Engagement</span>
+          <span class="skill-tag">Event Coordination</span><span class="skill-tag">Trade Fairs</span>
+          <span class="skill-tag">Showroom Prep</span><span class="skill-tag">VIP Hospitality</span>
+          <span class="skill-tag">Campaign Coordination</span><span class="skill-tag">Stakeholder Management</span>
+        </div>
+      </div>
+      <div class="skill-block reveal" style="transition-delay:.12s">
+        <div class="skill-block-title">Digital &amp; Création</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Canva</span><span class="skill-tag">Adobe Suite</span>
+          <span class="skill-tag">CapCut</span><span class="skill-tag">Mailchimp</span>
+          <span class="skill-tag">Social Media</span><span class="skill-tag">Copywriting</span>
+          <span class="skill-tag">Newsletters</span><span class="skill-tag">Content Strategy</span>
+          <span class="skill-tag">LinkedIn Management</span><span class="skill-tag">Visual Communication</span>
+          <span class="skill-tag">Creative Direction</span><span class="skill-tag">Wordbench</span>
+        </div>
+      </div>
+      <div class="skill-block reveal" style="transition-delay:.2s">
+        <div class="skill-block-title">Analysis &amp; Management</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Project Management</span><span class="skill-tag">Excel</span>
+          <span class="skill-tag">PowerPoint</span><span class="skill-tag">Salesforce</span>
+          <span class="skill-tag">R Studio</span><span class="skill-tag">Stata</span>
+          <span class="skill-tag">PLM / Cador (ACD)</span><span class="skill-tag">MindManager</span>
+          <span class="skill-tag">Reporting</span><span class="skill-tag">Data Analysis</span>
+          <span class="skill-tag">Budget Follow-up</span><span class="skill-tag">Cross-functional Coordination</span>
+        </div>
+      </div>
+    </div>
+    <div class="lang-row">
+      <div class="lang-item reveal" style="transition-delay:.28s" data-lang="FR"><div class="lang-name">FR</div><div class="lang-level">C2 — Native language</div></div>
+      <div class="lang-item reveal" style="transition-delay:.34s" data-lang="EN"><div class="lang-name">EN</div><div class="lang-level">C1/C2 — TOEFL</div></div>
+      <div class="lang-item reveal" style="transition-delay:.4s" data-lang="DE"><div class="lang-name">DE</div><div class="lang-level">Beginner</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOT GRID SEPARATOR -->
+<div id="dot-grid-sep" style="position:relative;height:440px;background:var(--ink);overflow:hidden;">
+  <canvas id="dot-canvas" style="display:block;width:100%;height:100%;"></canvas>
+  <div style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:'Montserrat',sans-serif;font-size:.48rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(192,154,91,.3);pointer-events:none;white-space:nowrap;">
+    Clara Gelas · Marketing · Communication · Brand · Events
+  </div>
+</div>
+
+<!-- BEYOND / WHAT MAKES ME ME -->
+
+<!-- ══ CREATIVE SECTION ══ -->
+<section id="creative" style="background:#f0ebe0;padding:0;">
+<style>
+#creative *{box-sizing:border-box;}
+.gw{padding:0 44px;}
+.gb{display:grid;grid-template-columns:1fr 2fr;grid-template-rows:370px 200px;gap:3px;margin-top:3px;transition:grid-template-columns .5s cubic-bezier(.4,0,.2,1),grid-template-rows .5s cubic-bezier(.4,0,.2,1);}
+.gt{display:grid;grid-template-columns:3fr 2fr;grid-template-rows:320px;gap:3px;transition:grid-template-columns .5s cubic-bezier(.4,0,.2,1),grid-template-rows .5s cubic-bezier(.4,0,.2,1);}
+.gt.hl{grid-template-columns:4fr 1.5fr;}.gt.hr{grid-template-columns:2fr 3fr;}
+
+.gb.hb3{grid-template-columns:1.8fr 2fr;}.gb.hb4{grid-template-columns:0.6fr 2fr;}.gb.hb5{grid-template-rows:280px 290px;grid-template-columns:1.8fr 2fr;}
+.card{position:relative;overflow:hidden;cursor:pointer;}
+.ci{width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 32px;position:relative;transition:background .4s ease;}
+.cn{position:absolute;top:20px;left:28px;font-size:52px;font-weight:400;font-family:'Georgia',serif;opacity:.3;color:#c8a090;line-height:1;transition:opacity .3s;}
+.cl{position:absolute;top:20px;right:24px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#c8a090;font-family:'Helvetica Neue',sans-serif;opacity:.8;}
+.ct-card{font-size:20px;font-weight:700;color:#f5e8dc;font-family:'Georgia',serif;line-height:1.25;margin-bottom:8px;transition:font-size .3s;}
+.cs{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#c8a090;font-family:'Helvetica Neue',sans-serif;}
+.card:hover .cn{opacity:.55;}.card:hover .ct-card{font-size:22px;}
+.card.active-card .ci{outline:2px solid rgba(240,235,224,.3);outline-offset:-2px;}
+.c01{grid-column:1;grid-row:1/3;}.c01 .ci{background:linear-gradient(150deg,#6b2020 0%,#4a1010 30%,#2e0808 65%,#1a0404 100%);}
+.c01:hover .ci{background:linear-gradient(150deg,#8b3030 0%,#6a1a1a 30%,#3d0d0d 65%,#220606 100%);}
+.c01 .cn{font-size:72px;}.c01 .ct-card{font-size:26px;}.c01:hover .ct-card{font-size:28px;}
+.c02{grid-column:2;grid-row:1;}.c02 .ci{background:linear-gradient(135deg,#7a1818 0%,#a82828 35%,#cc3838 65%,#e04848 100%);}
+.c02:hover .ci{background:linear-gradient(135deg,#9a2828 0%,#c83838 35%,#e04848 65%,#f05858 100%);}
+.brt{grid-column:2;grid-row:2;display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.csm .ci{background:linear-gradient(135deg,#2a1010 0%,#4a1818 50%,#6b2020 100%);padding:16px 18px;width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-end;position:relative;transition:background .4s;}
+.csm .cn{font-size:28px;top:12px;left:14px;opacity:.2;}
+.c03{grid-column:1;grid-row:1;}.c03 .ci{background:linear-gradient(135deg,#380c0c 0%,#5e1414 25%,#8b2020 60%,#6b1010 100%);}
+.c03:hover .ci{background:linear-gradient(135deg,#4a1010 0%,#781818 25%,#a02828 60%,#801414 100%);}
+.c03 .cn{font-size:64px;}.c03 .ct-card{font-size:24px;}
+.c04{grid-column:2;grid-row:1;}.c04 .ci{background:linear-gradient(150deg,#1a0a0a 0%,#3a1010 40%,#5a1818 75%,#2e0c0c 100%);}
+.c04:hover .ci{background:linear-gradient(150deg,#260e0e 0%,#4e1414 40%,#6e1e1e 75%,#3d1010 100%);}
+.c04 .cn{font-size:52px;}
+.c05{grid-column:1/span 2;grid-row:2;}.c05 .ci{background:linear-gradient(150deg,#071226 0%,#0f2444 40%,#1a3a5c 75%,#0a1929 100%);}.c05:hover .ci{background:linear-gradient(150deg,#0d1f3d 0%,#162f55 40%,#1f4a70 75%,#101e35 100%);}.c05 .cn{font-size:52px;}
+.empty-cg{grid-column:2;grid-row:2;background:#f0ebe0;display:flex;align-items:center;justify-content:center;}
+.edot-cg{width:12px;height:12px;border-radius:50%;border:1.5px solid #8b2020;background:transparent;}
+.carousel-panel{max-height:0;overflow:hidden;transition:max-height .7s cubic-bezier(.4,0,.2,1),opacity .5s ease;opacity:0;background:#fff;position:relative;}
+.carousel-panel.open{max-height:620px;opacity:1;}
+.panel-header{display:flex;align-items:center;justify-content:space-between;padding:32px 48px 0;}
+.panel-meta{font-family:'Helvetica Neue',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#bbb;}
+.panel-title-cg{font-size:28px;font-weight:400;color:#1a1a1a;font-family:'Georgia',serif;padding:16px 48px 0;}
+.panel-sub-cg{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#aaa;font-family:'Helvetica Neue',sans-serif;padding:8px 48px 0;}
+.close-btn{display:flex;align-items:center;gap:10px;background:none;border:none;cursor:pointer;font-family:'Helvetica Neue',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#aaa;transition:color .2s;}
+.close-btn:hover{color:#2a2a2a;}
+.close-circle{width:32px;height:32px;border-radius:50%;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:16px;color:#aaa;}
+.close-btn:hover .close-circle{border-color:#2a2a2a;color:#2a2a2a;}
+.cw-cg{width:100%;height:460px;overflow:hidden;display:flex;align-items:center;cursor:grab;user-select:none;position:relative;margin-top:8px;}
+.cw-cg.dragging{cursor:grabbing;}
+.ct2-cg{display:flex;align-items:center;position:absolute;left:0;top:0;bottom:0;}
+.arr-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:200;width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);box-shadow:0 2px 12px rgba(0,0,0,.1);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:box-shadow .2s;}
+.arr-btn:hover{box-shadow:0 4px 18px rgba(0,0,0,.16);}
+.arr-prev{left:32px;}.arr-next{right:32px;}
+.dots-row-cg{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:200;}
+.dot-cg{width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;transition:opacity .3s,transform .3s;}
+.cc-inner{width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;position:relative;border-radius:12px;overflow:hidden;}
+.cc-inner::after{content:'';position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(to top,rgba(0,0,0,.82) 0%,rgba(0,0,0,.45) 55%,transparent 100%);z-index:1;border-radius:0 0 12px 12px;pointer-events:none;}
+.cc-num-s{position:absolute;top:20px;left:22px;font-size:44px;font-weight:400;font-family:'Georgia',serif;opacity:.18;color:#f0e0d0;line-height:1;z-index:1;}
+.cc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;opacity:1;border-radius:12px;}
+.cc-tag-s{display:inline-block;margin-bottom:10px;font-family:'Helvetica Neue',sans-serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,224,210,.8);border:1px solid rgba(240,224,210,.3);padding:4px 10px;border-radius:20px;position:relative;z-index:2;}
+.cc-ttl{font-size:17px;font-weight:700;color:#f5e8dc;font-family:'Georgia',serif;line-height:1.3;margin-bottom:8px;position:relative;z-index:2;}
+.cc-dsc{font-size:11px;line-height:1.6;color:rgba(240,224,210,.75);font-family:'Helvetica Neue',sans-serif;position:relative;z-index:2;}
+.creative-header{padding:6rem 44px 3rem;}
+</style>
+
+<div class="creative-header">
+  <div style="font-size:.52rem;letter-spacing:.55em;text-transform:uppercase;color:#b8912a;display:flex;align-items:center;gap:1rem;margin-bottom:1rem;font-family:'Montserrat',sans-serif;">
+    04 — Projects<span style="flex:0 0 50px;height:1px;background:#b8912a;opacity:.4;display:inline-block;"></span>
+  </div>
+  <h2 style="font-family:'Playfair Display',serif;font-weight:300;font-size:clamp(2.8rem,5vw,5.5rem);line-height:.9;color:#1a0a0a;margin-bottom:0;">Creative<br><em style="font-style:italic;color:#b8912a;">Projects</em></h2>
+</div>
+
+<div class="gw">
+  <div class="gt" id="gt-cg">
+    <div class="card c01" id="cg-c01" onclick="cgOpenCarousel('01',this)">
+      <div class="ci"><div class="cn">01</div><div class="cl">Leadership</div>
+        <div class="ct-card">Head of Communications — Junior Entreprise HEC</div>
+        <div class="cs">Brand Promotion · Social Media · Event Materials · Client Mandates</div>
+      </div>
+    </div>
+    <div class="card c02" id="cg-c02" onclick="cgOpenCarousel('02',this)">
+      <div class="ci"><div class="cn">02</div><div class="cl">Team Sport</div>
+        <div class="ct-card">Head of Communications — Team Sport HEC</div>
+        <div class="cs">Visuals · Merchandising · Events · 60+ Participants</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="carousel-panel" id="cg-panel-01" data-num="01" data-title="Head of Communications — Junior Entreprise HEC" data-sub="Brand Promotion · Social Media · Event Materials · Client Mandates" data-cat="Leadership"></div>
+  <div class="carousel-panel" id="cg-panel-02" data-num="02" data-title="Head of Communications — Team Sport HEC" data-sub="Visuals · Merchandising · Events · 60+ Participants" data-cat="Team Sport"></div>
+
+  <div class="gb" id="gb-cg" style="margin-top:3px">
+    
+    <div class="card c03" id="cg-c03" onclick="cgOpenCarousel('03',this)">
+      <div class="ci"><div class="cn">03</div><div class="cl">Marketing & Ops</div>
+        <div class="ct-card">HR Bench &amp; IDLight</div>
+        <div class="cs">Newsletter · CRM · Maison &amp; Objet · LinkedIn · HR Strategy</div>
+      </div>
+    </div>
+    <div class="card c04" id="cg-c04" onclick="cgOpenCarousel('04',this)">
+      <div class="ci"><div class="cn">04</div><div class="cl">Personal Projects</div>
+        <div class="ct-card">Wonderful Island &amp; Moonraker</div>
+        <div class="cs">Creative Projects · Event Concept · Music Label</div>
+      </div>
+    </div>
+      <div class="card c05" id="cg-c05" onclick="cgOpenCarousel('05',this)">
+      <div class="ci"><div class="cn">05</div><div class="cl">University</div>
+        <div class="ct-card">Academic Projects</div>
+        <div class="cs">HEC Lausanne · MSC Management · Research · Mandates</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="carousel-panel" id="cg-panel-03" data-num="03" data-title="HR Bench &amp; IDLight — Marketing &amp; Ops" data-sub="Newsletter · CRM · Maison &amp; Objet · LinkedIn · Digital HR Strategy" data-cat="Marketing & Ops"></div>
+  <div class="carousel-panel" id="cg-panel-04" data-num="04" data-title="Wonderful Island &amp; Moonraker — Personal Projects" data-sub="Event Concept · Music Label · Creative Direction · Independent" data-cat="Personal Projects"></div>
+  <div class="carousel-panel" id="cg-panel-05" data-num="05" data-title="Academic Projects — HEC Lausanne" data-sub="MSC Management · Research · University Mandates" data-cat="Academic Projects"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+const ALL_SLIDES_CG = {
+"01":[
+  {"num":"01","tag":"Recruitment","title":"WE ARE HIRING — Campus","desc":"Recruitment poster on the HEC Lausanne campus.","bg":"linear-gradient(150deg,#0a1929 0%,#1a3a5c 100%)","img":"assets/images/img_0003.jpg"},
+  {"num":"02","tag":"Recruitment","title":"WE ARE HIRING — Femme","desc":"Déclinaison affiche recrutement version oratrice.","bg":"linear-gradient(150deg,#1c3a5c 0%,#2e5a8c 100%)","img":"assets/images/img_0004.jpg"},
+  {"num":"03","tag":"Recruitment","title":"WE ARE HIRING — Poster","desc":"Version poster pleine page — Infos Session 11 mai.","bg":"linear-gradient(150deg,#0a1929 0%,#1e4a7a 100%)","img":"assets/images/img_0005.jpg"},
+  {"num":"04","tag":"Recruitment","title":"WE ARE HIRING — Golfer","desc":"Version golfeur — campagne recrutement déclinée.","bg":"linear-gradient(150deg,#1a2e1a 0%,#2a4a2a 100%)","img":"assets/images/img_0006.jpg"},
+  {"num":"05","tag":"Recruitment","title":"WE ARE HIRING — Costume","desc":"Version homme en costume — Infos Session.","bg":"linear-gradient(150deg,#0d1929 0%,#1a3a6a 100%)","img":"assets/images/img_0007.jpg"},
+  {"num":"06","tag":"Events","title":"Business Game JE","desc":"Business Game · CHF 3000 Prize Pool · Deloitte · UBS · SwissLife.","bg":"linear-gradient(150deg,#0d0d0d 0%,#2a2a2a 100%)","img":"assets/images/img_0008.jpg"},
+  {"num":"07","tag":"Events","title":"31st Business Golf Cup","desc":"Affiche Golf Cup — Golf Club de Lausanne · April 29.","bg":"linear-gradient(150deg,#1a2e1a 0%,#3a5a2a 100%)","img":"assets/images/img_0009.jpg"},
+  {"num":"08","tag":"Events","title":"Golf Cup — L'équipe","desc":"L'équipe JE au 31st Business Golf Cup, Lausanne Golf Club.","bg":"linear-gradient(150deg,#0a1a2e 0%,#1a3a5c 100%)","img":"assets/images/img_0010.jpg"},
+  {"num":"09","tag":"Events","title":"Golf Cup — Cocktail","desc":"Cocktail sur le green après le tournoi.","bg":"linear-gradient(150deg,#0a2e0a 0%,#1a5a2a 100%)","img":"assets/images/img_0011.jpg"},
+  {"num":"10","tag":"Gala Alumni","title":"Magazine Gala Alumni","desc":"Brochure Gala Alumni 2022 — Lausanne Palace · Tombola · Cocktail · Dîner.","bg":"linear-gradient(150deg,#3d0c0c 0%,#6b1818 100%)","img":"assets/images/img_0012.jpg"},
+  {"num":"11","tag":"Gala Alumni","title":"Gala Alumni — Équipe","desc":"L'équipe JE au Gala Alumni 2022 — Lausanne Palace.","bg":"linear-gradient(150deg,#2e0808 0%,#5a1414 100%)","img":"assets/images/img_0013.jpg"},
+  {"num":"12","tag":"Digital","title":"Instagram @jehec","desc":"Feed Instagram JE HEC Lausanne — 2058 followers.","bg":"linear-gradient(150deg,#0a1929 0%,#1a3a5c 100%)","img":"assets/images/img_0014.jpg"},
+  {"num":"13","tag":"Direction Artistique","title":"Captures créations","desc":"Visuels et créations graphiques JE HEC Lausanne.","bg":"linear-gradient(150deg,#1a1a2e 0%,#2a2a5c 100%)","img":"assets/images/img_0015.jpg"},
+  {"num":"14","tag":"Direction Artistique","title":"Captures 2","desc":"Direction artistique — contenus digitaux et print.","bg":"linear-gradient(150deg,#0d1929 0%,#1e3a6a 100%)","img":"assets/images/img_0016.jpg"}
+,
+  {"num":"15","tag":"Gala Alumni","title":"Invitation Soirée de Gala","desc":"Visuel invitation officielle — Soirée de Gala Alumni JE HEC · 19.03.2022 · Lausanne Palace.","bg":"linear-gradient(150deg,#3d0c1a 0%,#6b1830 100%)","img":"assets/images/img_0017.jpg"},
+  {"num":"16","tag":"Vidéo · Gala Alumni","title":"Soirée Gala Alumni 2022","desc":"Discours d'ouverture · Lausanne Palace · Dîner & Tombola.","bg":"linear-gradient(150deg,#2e0808 0%,#5a1414 100%)","vid":"assets/videos/vid_0002.mp4","video":"assets/videos/vid_0003.mp4"},
+  {"num":"17","tag":"Vidéo · Business Game","title":"Business Game — Trailer","desc":"Teaser officiel Business Game JE HEC — A unique opportunity to stand out.","bg":"linear-gradient(150deg,#0d0d0d 0%,#1a1a2e 100%)","vid":"assets/videos/vid_0004.mp4","video":"assets/videos/vid_0005.mp4"},
+  {"num":"18","tag":"Vidéo · Golf Cup","title":"Golf Cup — Cinématique","desc":"Clip cinématique de la 31st Business Golf Cup — Golf Club de Lausanne.","bg":"linear-gradient(150deg,#1a2e1a 0%,#2a4a2a 100%)","vid":"assets/videos/vid_0006.mp4","video":"assets/videos/vid_0007.mp4"},
+  {"num":"19","tag":"Vidéo · Mandats","title":"Reel FAQ & Mandats","desc":"Vidéo de présentation des mandats et services JE HEC Lausanne.","bg":"linear-gradient(150deg,#0a1929 0%,#1a3a5c 100%)","vid":"assets/videos/vid_0008.mp4","video":"assets/videos/vid_0009.mp4"},
+  {"num":"20","tag":"Vidéo · Business Game","title":"Business Game — Coulisses","desc":"HEC JE événement Business Game — coulisses et ambiance.","bg":"linear-gradient(135deg,#0a1929 0%,#1a3a5c 100%)","video":"assets/videos/vid_0010.mp4"},
+  {"num":"21","tag":"Vidéo · Events","title":"JE HEC — Événement","desc":"Junior Entreprise HEC — moments d'événement en direct.","bg":"linear-gradient(135deg,#1a2a0a 0%,#2a4a10 100%)","video":"assets/videos/vid_0011.mp4"},
+  {"num":"22","tag":"Vidéo · Golf Cup","title":"Golf Cup — Moments","desc":"31st Business Golf Cup — moments forts et équipe.","bg":"linear-gradient(135deg,#1a0a0a 0%,#3a1010 100%)","video":"assets/videos/vid_0012.mp4"},
+  {"num":"23","tag":"Vidéo · Events","title":"JE HEC — Atmosphère","desc":"Junior Entreprise HEC — atmosphère événementielle.","bg":"linear-gradient(135deg,#0a0a2a 0%,#101040 100%)","video":"assets/videos/vid_0013.mp4"},
+  {"num":"24","tag":"Vidéo · Events","title":"JE HEC — Reel Visuel","desc":"Junior Entreprise HEC — reel visuel court.","bg":"linear-gradient(135deg,#2a1a0a 0%,#4a2a10 100%)","video":"assets/videos/vid_0014.mp4"},
+  {"num":"25","tag":"Vidéo · Events","title":"JE HEC — Printemps 2022","desc":"Junior Entreprise HEC — soirée printemps 2022.","bg":"linear-gradient(135deg,#0a2a1a 0%,#103a2a 100%)","video":"assets/videos/vid_0015.mp4"}
+],
+"02":[
+  {"num":"01","tag":"Recruitment","title":"ON RECRUTE — Affiche","desc":"Campagne recrutement — 14.3K vues Instagram.","bg":"linear-gradient(135deg,#8b2020 0%,#4a0c0c 100%)","img":"assets/images/img_0018.jpg"},
+  {"num":"02","tag":"Merchandising","title":"Chapeaux & Banane HEC","desc":"Bon à tirer — Chapeau BF789 + Banane noire brodés HEC Team Sport.","bg":"linear-gradient(135deg,#a82828 0%,#5e1010 100%)","img":"assets/images/img_0019.jpg"},
+  {"num":"03","tag":"Events","title":"Dégustation Nébuleuse","desc":"Beer tasting + Water Pong tournament poster — 13.12.23 Refuge Laviau.","bg":"linear-gradient(135deg,#cc3838 0%,#7a1818 100%)","img":"assets/images/img_0020.jpg"},
+  {"num":"04","tag":"Booth","title":"Stand recrutement campus","desc":"Campus info session — fortune wheel, goodies, HEC Team Sport booth.","bg":"linear-gradient(135deg,#6b1414 0%,#380808 100%)","img":"assets/images/img_0021.jpg"},
+  {"num":"05","tag":"Booth","title":"Roue de la fortune","desc":"Handmade fortune wheel — branding HEC Lausanne Team Sport.","bg":"linear-gradient(135deg,#8b2020 0%,#5a1010 100%)","img":"assets/images/img_0022.jpg"},
+  {"num":"06","tag":"Presentation","title":"CCE Presentation","desc":"EDHEC Cruise Race presentation — teams, dates, logistics.","bg":"linear-gradient(135deg,#3a1a0a 0%,#6b3a10 100%)","img":"assets/images/img_0023.jpg"},
+  {"num":"07","tag":"Instagram","title":"Feed @heclausanne_te...","desc":"903 followers · 21.4K views/month · Contenus événementiels et recrutement.","bg":"linear-gradient(135deg,#9a2020 0%,#520c0c 100%)","img":"assets/images/img_0024.jpg"},
+  {"num":"08","tag":"Instagram","title":"Grid Instagram","desc":"Posts — Water Pong, CCE, ON RECRUTE, événements sport.","bg":"linear-gradient(135deg,#7a1818 0%,#400c0c 100%)","img":"assets/images/img_0025.jpg"},
+  {"num":"10","tag":"Video","title":"Reel événementiel 2","desc":"HEC Team Sport video — campus, recruitment, activation.","bg":"linear-gradient(135deg,#5a1010 0%,#9a2828 100%)","video":"assets/videos/vid_0016.mp4","thumb":"assets/images/img_0026.jpg"},
+  {"num":"11","tag":"Video","title":"Reel événementiel 3","desc":"HEC Team Sport video — evening event, sport, team.","bg":"linear-gradient(135deg,#3a0808 0%,#7a1818 100%)","video":"assets/videos/vid_0017.mp4","thumb":"assets/images/img_0027.jpg"},
+  {"num":"12","tag":"Screen Recording","title":"Screen Recording Instagram","desc":"Instagram @heclausanne_te... — content, stories, stats.","bg":"linear-gradient(135deg,#2a1010 0%,#6b2020 100%)","video":"assets/videos/vid_0018.mp4","thumb":"assets/images/img_0028.jpg"},
+  {"num":"13","tag":"Photo","title":"Team Sport — Life","desc":"HEC Lausanne Team Sport club life photo.","bg":"linear-gradient(135deg,#1a0808 0%,#5a1414 100%)","img":"assets/images/img_0029.jpg"}
+,
+  {"num":"15","tag":"Video","title":"Reel événementiel 4","desc":"","bg":"linear-gradient(150deg,#3d0808 0%,#6b1010 50%,#8b2020 100%)","video":"assets/videos/vid_0019.mp4"},
+  {"num":"16","tag":"Video","title":"Reel événementiel 5","desc":"","bg":"linear-gradient(150deg,#3d0808 0%,#6b1010 50%,#8b2020 100%)","video":"assets/videos/vid_0020.mp4"}],
+"03":[
+  {"num":"01","tag":"IDLight","title":"Salon Zafferano — Maison & Objet","desc":"Showroom Prep & présence au salon Maison & Objet Paris — Oct 2025.","bg":"linear-gradient(135deg,#1a2a3a 0%,#2e4a6a 100%)","img":"assets/images/img_0030.jpg"},
+  {"num":"02","tag":"HR Bench","title":"Plateforme HR Bench Institute","desc":"Gestion de la plateforme — 300+ études RH, filtres thématiques, alimentation de contenu.","bg":"linear-gradient(150deg,#1a0a0a 0%,#3a1010 100%)","img":"assets/images/img_0031.jpg"},
+  {"num":"03","tag":"HR Bench","title":"Recueil d'enquêtes RH","desc":"Rémunération · Digitalisation · Leadership · Santé au travail · Culture et gouvernance.","bg":"linear-gradient(150deg,#2a1010 0%,#5a2020 100%)","img":"assets/images/img_0032.jpg"},
+  {"num":"04","tag":"Newsletter","title":"Première newsletter HR Bench","desc":"Design Mailchimp · Vision différente pour repenser le futur du travail · Déc. 2024.","bg":"linear-gradient(150deg,#1a1a2e 0%,#2a2a5c 100%)","img":"assets/images/img_0033.jpg"},
+  {"num":"05","tag":"Newsletter","title":"Visuel newsletter","desc":"HR Bench Newsletter · Benchmarks · Surveys · Research · tendances RH internationales.","bg":"linear-gradient(150deg,#0d1929 0%,#1e3a6a 100%)","img":"assets/images/img_0034.jpg"},
+  {"num":"06","tag":"Contenu","title":"Études & analyses RH","desc":"Contenu éditorial : Étude C&B 2024 · Marché du travail T3 2024 · Sources Deloitte, Dares.","bg":"linear-gradient(150deg,#1a2a1a 0%,#2a4a2a 100%)","img":"assets/images/img_0035.jpg"},
+  {"num":"07","tag":"Stratégie","title":"LinkedIn & audience","desc":"Rédaction · Planning éditorial · Engagement audience · Tendances RH Suisse & France.","bg":"linear-gradient(150deg,#2e1a0a 0%,#5a3a10 100%)","img":"assets/images/img_0036.jpg"}
+,
+  {"num":"08","tag":"IDLight","title":"IDLight — Plateforme & Contenu","desc":"Capture plateforme IDLight — interface et contenu digital.","bg":"linear-gradient(135deg,#380c0c 0%,#5e1414 25%,#8b2020 60%,#6b1010 100%)","img":"assets/images/img_0037.jpg"}
+],
+"04":[
+  {"num":"01","tag":"Wonderful Island","title":"Instagram @wonderful__island","desc":"Swiss party concept · Because dreams persist · 160 followers · Line-up, visuels événementiels.","bg":"linear-gradient(150deg,#0a1a2e 0%,#1a3a5c 50%,#3d9ab5 100%)","img":"assets/images/img_0038.jpg"},
+  {"num":"02","tag":"Wonderful Island","title":"Feed & Direction Artistique","desc":"Visuels événementiels — Last Dance · Jetée de la Compagnie · 23 mai · Alice in Wonderland.","bg":"linear-gradient(150deg,#0a1e1a 0%,#0d3a2e 50%,#1e6a5a 100%)","img":"assets/images/img_0039.jpg"},
+  {"num":"03","tag":"Wonderful Island","title":"Affiche 23/05 — Mad Hatter","desc":"Direction artistique — clé trou de serrure · Cheshire Cat · Comité HEC Lausanne.","bg":"linear-gradient(150deg,#0a1a2e 0%,#1a2e3a 50%,#2e4a5c 100%)","img":"assets/images/img_0040.jpg"}
+,
+  {"num":"04","tag":"Moonraker","title":"Moonraker Records","desc":"An original Space orchestra · Music label & events · @moonraker.records · 1 074 followers.","bg":"linear-gradient(135deg,#050510 0%,#0d0d20 40%,#12102a 100%)","img":"assets/images/img_0041.jpg"}
+],
+"05":[
+  {"num":"01","tag":"Photo","title":"Projet Académique — Capture","desc":"Capture projet universitaire — HEC Lausanne.","bg":"linear-gradient(135deg,#071226 0%,#0f2444 100%)","img":"assets/images/img_0042.jpg"},
+  {"num":"02","tag":"Photo","title":"Campus — Moment","desc":"Vie universitaire HEC Lausanne.","bg":"linear-gradient(135deg,#091a1a 0%,#0f3030 100%)","img":"assets/images/img_0043.jpg"},
+  {"num":"03","tag":"Photo","title":"Université — Vie","desc":"Moments campus et projets HEC Lausanne.","bg":"linear-gradient(135deg,#1a1226 0%,#2a1a40 100%)","img":"assets/images/img_0044.jpg"},
+  {"num":"04","tag":"Vidéo · Projet","title":"Marketing — Rythme de Vie","desc":"Projet marketing universitaire — pitch vidéo.","bg":"linear-gradient(135deg,#071a26 0%,#0f2a3a 100%)","video":"assets/videos/vid_0021.mp4"},
+  {"num":"05","tag":"Vidéo · Présentation","title":"Présentation Live","desc":"Soutenance et présentation académique — enregistrement.","bg":"linear-gradient(135deg,#071226 0%,#0f2444 100%)","video":"assets/videos/vid_0022.mp4"},
+  {"num":"06","tag":"Vidéo · Projet","title":"Projet Universitaire — Film","desc":"Réalisation audiovisuelle — projet universitaire.","bg":"linear-gradient(135deg,#091a1a 0%,#0f3030 100%)","video":"assets/videos/vid_0023.mp4"},
+  {"num":"07","tag":"Vidéo · Mémoire","title":"Mémoire de Master — Soutenance","desc":"MSC Management HEC Lausanne · Mémoire de master · Soutenance.","bg":"linear-gradient(135deg,#1a1226 0%,#2a1a40 100%)","video":"assets/videos/vid_0024.mp4"}
+,
+  {"num":"08","tag":"PDF · Mémoire","title":"Mémoire de Master — Document","desc":"MSC Management HEC Lausanne · Anchoring a Quality Framework · Document complet.","bg":"linear-gradient(135deg,#071226 0%,#0f2444 100%)","pdf":"assets/docs/doc_0001.pdf"}
+]
+};
+
+const SLIDE_W=300,SLIDE_H=420,GAP=20,PERSPECTIVE=1000,MAX_RY=42,DEPTH=140;
+const ACT_SC=1,INACT_SC=0.85,INACT_OP=0.45,SNAP_DUR=0.55,SNAP_EASE="power3.out";
+let cgActivePanel=null,cgActiveCard=null;
+const cgCarousels={};
+
+function cgBuildCarousel(panelEl,slides){
+  const id=panelEl.id,num=panelEl.dataset.num,title=panelEl.dataset.title,sub=panelEl.dataset.sub,cat=panelEl.dataset.cat;
+  panelEl.innerHTML=`<div class="panel-header"><div><div class="panel-meta">${num} · ${cat}</div></div><button class="close-btn" onclick="cgCloseCarousel('${id}')"><span>Close</span><div class="close-circle">&#8593;</div></button></div><div class="panel-title-cg">${title}</div><div class="panel-sub-cg">${sub}</div><div class="cw-cg" id="cw-${id}"><div class="ct2-cg" id="ct-${id}"></div><button class="arr-btn arr-prev" id="prev-${id}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button><button class="arr-btn arr-next" id="next-${id}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></button><div class="dots-row-cg" id="dots-${id}"></div></div>`;
+  const wrapper=document.getElementById('cw-'+id),track=document.getElementById('ct-'+id),dotsRow=document.getElementById('dots-'+id),btnPrev=document.getElementById('prev-'+id),btnNext=document.getElementById('next-'+id);
+  const domSlides=[],dots=[];let activeIndex=0;
+  const trackX={current:0},drag={active:false,startX:0,startTrackX:0,lastX:0,lastTime:0,velocity:0};
+  const step=SLIDE_W+GAP;
+  function centerXFor(i){return wrapper.offsetWidth/2-i*step-SLIDE_W/2;}
+  function renderFrame(){
+    track.style.transform='translateX('+trackX.current+'px)';
+    const center=wrapper.offsetWidth/2;
+    domSlides.forEach((slide,i)=>{
+      const sc=i*step+SLIDE_W/2+trackX.current,norm=(sc-center)/step,abs=Math.abs(norm);
+      const ry=norm*MAX_RY,tz=-abs*DEPTH,s2=Math.max(INACT_SC,ACT_SC-abs*(ACT_SC-INACT_SC)),op=Math.max(INACT_OP,1-abs*(1-INACT_OP));
+      slide.style.transform='perspective('+PERSPECTIVE+'px) rotateY('+ry+'deg) translateZ('+tz+'px) scale('+s2+')';
+      slide.style.opacity=op;slide.style.zIndex=100-Math.round(abs*10);
+    });
+  }
+  function updateDots(idx){dots.forEach((d,i)=>{d.style.opacity=i===idx?'1':'0.3';d.style.transform=i===idx?'scale(1.4)':'scale(1)';});}
+  function snapTo(i,instant){
+    const target=((i%slides.length)+slides.length)%slides.length;activeIndex=target;updateDots(target);
+    const x=centerXFor(target);
+    if(instant){trackX.current=x;renderFrame();return;}
+    gsap.killTweensOf(trackX);gsap.to(trackX,{current:x,duration:SNAP_DUR,ease:SNAP_EASE,onUpdate:renderFrame});
+  }
+  slides.forEach((s,i)=>{
+    const outer=document.createElement('div');
+    outer.style.cssText='width:'+SLIDE_W+'px;height:'+SLIDE_H+'px;flex-shrink:0;will-change:transform,opacity;margin-right:'+(i<slides.length-1?GAP:0)+'px;border-radius:12px;overflow:hidden;';
+    var mediaHtml;
+    if(s.video){
+      mediaHtml='';
+    } else if(s.img){
+      mediaHtml='<img class="cc-img" src="'+s.img+'" alt="'+s.title+'" />';
+    } else {
+      mediaHtml='';
+    }
+    outer.innerHTML='<div class="cc-inner" style="background:'+s.bg+'"><div class="cc-num-s">'+s.num+'</div>'+mediaHtml+'<div class="cc-tag-s" style="position:relative;z-index:3;">'+s.tag+'</div><div class="cc-ttl" style="position:relative;z-index:2;">'+s.title+'</div><div class="cc-dsc" style="position:relative;z-index:3;">'+s.desc+'</div></div>';
+    if(s.video){
+      var vid=document.createElement('video');
+      vid.className='cc-img';
+      vid.controls=true;
+      vid.setAttribute('playsinline','');
+      vid.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;opacity:1;border-radius:12px;z-index:1;background:#000;';
+      vid.src=s.video;
+      var inner=outer.querySelector('.cc-inner');
+      inner.insertBefore(vid,inner.querySelector('.cc-tag-s'));
+    }
+    if(s.pdf){
+      var frame=document.createElement('iframe');
+      frame.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:none;border-radius:12px;z-index:1;';
+      frame.src=s.pdf;
+      outer.querySelector('.cc-inner').insertBefore(frame,outer.querySelector('.cc-tag-s'));
+    }
+    track.appendChild(outer);domSlides.push(outer);
+    const btn=document.createElement('button');btn.className='dot-cg';btn.style.background='#8b2020';btn.style.opacity=i===0?'1':'0.3';btn.style.transform=i===0?'scale(1.4)':'scale(1)';
+    btn.addEventListener('click',()=>snapTo(i));dotsRow.appendChild(btn);dots.push(btn);
+  });
+  snapTo(0,true);
+  function onStart(e){gsap.killTweensOf(trackX);drag.active=true;const x=e.touches?e.touches[0].clientX:e.clientX;drag.startX=x;drag.startTrackX=trackX.current;drag.lastX=x;drag.lastTime=Date.now();drag.velocity=0;wrapper.classList.add('dragging');}
+  function onMove(e){if(!drag.active)return;if(e.cancelable)e.preventDefault();const x=e.touches?e.touches[0].clientX:e.clientX;const now=Date.now(),dt=now-drag.lastTime;if(dt>0)drag.velocity=(x-drag.lastX)/dt*1000;drag.lastX=x;drag.lastTime=now;trackX.current=drag.startTrackX+(x-drag.startX);renderFrame();}
+  function onEnd(){if(!drag.active)return;drag.active=false;wrapper.classList.remove('dragging');const projected=trackX.current+drag.velocity*0.12;const center=wrapper.offsetWidth/2;let best=0,bestDist=Infinity;for(let i=0;i<slides.length;i++){const sc=i*step+SLIDE_W/2+projected,d=Math.abs(sc-center);if(d<bestDist){bestDist=d;best=i;}}snapTo(best);}
+  wrapper.addEventListener('mousedown',onStart);window.addEventListener('mousemove',onMove);window.addEventListener('mouseup',onEnd);
+  wrapper.addEventListener('touchstart',onStart,{passive:true});window.addEventListener('touchmove',onMove,{passive:false});window.addEventListener('touchend',onEnd);
+  btnPrev.addEventListener('click',()=>snapTo(activeIndex-1));btnNext.addEventListener('click',()=>snapTo(activeIndex+1));
+  window.addEventListener('resize',()=>snapTo(activeIndex,true));
+  cgCarousels[id]={snapTo,renderFrame,wrapper};
+}
+
+document.querySelectorAll('#creative .carousel-panel').forEach(p=>{
+  const slides=ALL_SLIDES_CG[p.dataset.num];
+  cgBuildCarousel(p,slides);
+});
+
+window.cgOpenCarousel=function(num,cardEl){
+  const panelId='cg-panel-'+num;
+  if(cgActivePanel===panelId){cgCloseCarousel(panelId);return;}
+  if(cgActivePanel){document.getElementById(cgActivePanel).classList.remove('open');if(cgActiveCard)cgActiveCard.classList.remove('active-card');}
+  cgActivePanel=panelId;cgActiveCard=cardEl;cardEl.classList.add('active-card');
+  const panel=document.getElementById(panelId);panel.classList.add('open');
+  setTimeout(()=>{panel.scrollIntoView({behavior:'smooth',block:'start'});const c=cgCarousels[panelId];if(c)c.snapTo(0,true);},80);
+};
+window.cgCloseCarousel=function(panelId){
+  const panel=document.getElementById(panelId);panel.classList.remove('open');
+  if(cgActiveCard)cgActiveCard.classList.remove('active-card');
+  cgActivePanel=null;cgActiveCard=null;
+};
+const gtCg=document.getElementById('gt-cg'),gbCg=document.getElementById('gb-cg');
+[{el:document.getElementById('cg-c01'),cls:'hl'},{el:document.getElementById('cg-c02'),cls:'hr'}].forEach(({el,cls})=>{
+  el.addEventListener('mouseenter',()=>{if(cgActivePanel)return;gtCg.classList.remove('hl','hr');gtCg.classList.add(cls);});
+  el.addEventListener('mouseleave',()=>{if(cgActivePanel)return;gtCg.classList.remove('hl','hr');});
+});
+[{el:document.getElementById('cg-c03'),cls:'hb4'},{el:document.getElementById('cg-c04'),cls:'hb5'}].forEach(({el,cls})=>{
+  el.addEventListener('mouseenter',()=>{if(cgActivePanel)return;gbCg.classList.remove('hb3','hb4','hb5');gbCg.classList.add(cls);});
+  el.addEventListener('mouseleave',()=>{if(cgActivePanel)return;gbCg.classList.remove('hb3','hb4','hb5');});
+});
+})();
+</script>
+
+</section>
+
+<div style="height:80px;background:var(--ink);"></div>
+
+<!-- BEYOND / WHAT MAKES ME ME -->
+<section id="beyond" style="background:var(--ink);padding:8rem 0 0;">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="s-label">05 — Beyond Work</div>
+      <h2 class="s-title">What makes me <em>me</em></h2>
+    </div>
+  </div>
+  <div style="padding:3rem 0 0;height:88vh;min-height:600px;display:flex;align-items:stretch;justify-content:center;">
+    <div class="kiffs-gallery" id="kiffs-gallery">
+      <div class="kcol closed" onclick="kToggle(this)">
+        <div class="kcol-bg" style="background:linear-gradient(160deg,#0a2438 0%,#1a4d6b 40%,#3d9ab5 70%,#a8e6ef 100%)"></div>
+        <div class="kcol-overlay"></div><div class="kcol-label">Outdoor &amp; Board Culture</div>
+        <div class="kcol-content">
+          <button class="kclose-btn" onclick="event.stopPropagation();kClose(this.closest('.kcol'))">&#x2715;</button>
+          <div class="kcol-title">Outdoor &amp; Board Culture</div><div class="kcol-sub">The ocean as playground</div>
+          <div class="kphoto-grid layout-feature" style="grid-template-columns:1.4fr 1fr;grid-template-rows:repeat(3,1fr);">
+            <div class="kphoto-cell"><img src="assets/images/img_0045.jpg" loading="lazy" /></div><div class="kphoto-cell"><img src="assets/images/img_0046.jpg" loading="lazy" /></div><div class="kphoto-cell"><img src="assets/images/img_0047.jpg" loading="lazy" /></div><div class="kphoto-cell"><img src="assets/images/img_0048.jpg" loading="lazy" /></div><div class="kphoto-cell"><img src="assets/images/img_0049.jpg" loading="lazy" /></div><div class="kphoto-cell" style="position:relative;"><video controls playsinline style="width:100%;height:100%;object-fit:cover;display:block;" src="assets/videos/vid_0025.mp4"></video></div>
+          </div>
+        </div>
+      </div>
+      <div class="kcol closed" onclick="kToggle(this)">
+        <div class="kcol-bg" style="background:linear-gradient(160deg,#1a1a1a 0%,#2a2a2a 40%,#b8912a 80%,#d4af72 100%)"></div>
+        <div class="kcol-overlay"></div><div class="kcol-label">Fashion</div>
+        <div class="kcol-content">
+          <button class="kclose-btn" onclick="event.stopPropagation();kClose(this.closest('.kcol'))">&#x2715;</button>
+          <div class="kcol-title">Fashion</div><div class="kcol-sub">Style &amp; visual culture</div>
+          <div class="kphoto-grid">
+            <div class="kphoto-cell"><div class="kph">Coming soon</div></div>
+            <div class="kphoto-cell"><div class="kph">Coming soon</div></div>
+            <div class="kphoto-cell"><div class="kph">Coming soon</div></div>
+            <div class="kphoto-cell"><div class="kph">Coming soon</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="kcol closed" onclick="kToggle(this)">
+        <div class="kcol-bg" style="background:linear-gradient(135deg,#0e1117 0%,#1f2937 30%,#b8912a 65%,#e8d5a8 100%)"></div>
+        <div class="kcol-overlay"></div><div class="kcol-label">Photo &amp; Creation</div>
+        <div class="kcol-content">
+          <button class="kclose-btn" onclick="event.stopPropagation();kClose(this.closest('.kcol'))">&#x2715;</button>
+          <div class="kcol-title">Photo &amp; Creation</div><div class="kcol-sub">The eye as a tool</div>
+          <div class="kphoto-grid layout-feature"><div class="kphoto-cell"><img src="assets/images/img_0050.jpg" loading="lazy" /></div></div>
+        </div>
+      </div>
+      <div class="kcol closed" onclick="kToggle(this)">
+        <div class="kcol-bg" style="background:linear-gradient(160deg,#3d1a1a 0%,#6b2020 40%,#8a3030 70%,#c8a090 100%)"></div>
+        <div class="kcol-overlay"></div><div class="kcol-label">Sport</div>
+        <div class="kcol-content">
+          <button class="kclose-btn" onclick="event.stopPropagation();kClose(this.closest('.kcol'))">&#x2715;</button>
+          <div class="kcol-title">Sport</div><div class="kcol-sub">Football · Rugby · Movement</div>
+          <div class="kphoto-grid"><div class="kphoto-cell"><img src="assets/images/img_0051.jpg" loading="lazy" /></div><div class="kphoto-cell"><img src="assets/images/img_0052.jpg" loading="lazy" /></div></div>
+        </div>
+      </div>
+      <div class="kcol closed" onclick="kToggle(this)">
+        <div class="kcol-bg" style="background:linear-gradient(160deg,#1e1208 0%,#6b4020 40%,#b8912a 70%,#f0d080 100%)"></div>
+        <div class="kcol-overlay"></div><div class="kcol-label">Travel &amp; Exploration</div>
+        <div class="kcol-content">
+          <button class="kclose-btn" onclick="event.stopPropagation();kClose(this.closest('.kcol'))">&#x2715;</button>
+          <div class="kcol-title">Travel &amp; Exploration</div><div class="kcol-sub">Alsace · Lausanne · Atlanta · Paris</div>
+          <div class="kphoto-grid"><div class="kphoto-cell"><img src="assets/images/img_0053.jpg" loading="lazy" /></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="position:relative;overflow:hidden;">
+  <!-- BASE — fully visible -->
+  <div class="contact-base">
+    <div class="wrap">
+      <span class="contact-over">Available for opportunities</span>
+      <div style="display:flex;justify-content:center;margin:1.5rem 0;">
+        <div class="spin-wrap">
+          <svg class="spin-svg" viewBox="0 0 140 140">
+            <defs><path id="sc2" d="M70,70 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/></defs>
+            <text style="fill:rgba(192,154,91,.5);"><textPath href="#sc2">CG · Communication · Brand · Event · Digital · &nbsp;</textPath></text>
+          </svg>
+          <div class="spin-center" style="background:rgba(192,154,91,.12);border:1px solid rgba(192,154,91,.3);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(192,154,91,.8)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          </div>
+        </div>
+      </div>
+      <h2 class="contact-h">Let's <em>create</em><br>together</h2>
+      <p class="contact-sub">Open to roles in luxury, fashion &amp; design, events and brand coordination — across Europe.</p>
+      <div class="contact-row">
+        <a href="mailto:cmgelas7@gmail.com" class="c-link"><span class="c-link-lbl">Email</span><span class="c-link-val">cmgelas7@gmail.com</span></a>
+        <a href="tel:+33678134943" class="c-link"><span class="c-link-lbl">Phone</span><span class="c-link-val">+33 6 78 13 49 43</span></a>
+        <a href="https://www.linkedin.com/in/clara-gelas" target="_blank" class="c-link"><span class="c-link-lbl">LinkedIn</span><span class="c-link-val">Clara Gelas ↗</span></a>
+        <div class="c-link"><span class="c-link-lbl">Based in</span><span class="c-link-val">Lausanne · Paris</span></div>
+      </div>
+      <h3 class="faq-section-title">Got questions? <em>We've got answers.</em></h3>
+      <div class="faq-grid" style="pointer-events:auto;">
+        <div class="faq-item" onclick="this.classList.toggle('open')"><p class="faq-q">Are you open to relocation?</p><p class="faq-a">Yes — based between Lausanne and Paris, open to opportunities across Europe, with a strong preference for France and Switzerland.</p></div>
+        <div class="faq-item" onclick="this.classList.toggle('open')"><p class="faq-q">What type of role are you targeting?</p><p class="faq-a">Roles at the intersection of marketing, project coordination and brand communication — ideally in luxury, fashion or design environments.</p></div>
+        <div class="faq-item" onclick="this.classList.toggle('open')"><p class="faq-q">When are you available?</p><p class="faq-a">Currently available and actively looking. Feel free to reach out — I respond quickly.</p></div>
+        <div class="faq-item" onclick="this.classList.toggle('open')"><p class="faq-q">Do you speak English fluently?</p><p class="faq-a">Yes — C1/C2 level, TOEFL certified. I've studied and worked internationally (Atlanta exchange year).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-mark">Clara Gelas</span>
+  <span>Marketing · Communication · Project Management</span>
+  <span>© 2025</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+// CURSOR
+// BIOLUMINESCENT
+const bio=document.getElementById('biolum');
+for(let i=0;i<45;i++){
+  const d=document.createElement('div');d.className='bio-dot';
+  const s=1+Math.random()*2.5;
+  d.style.left=Math.random()*100+'%';d.style.top=Math.random()*100+'%';
+  d.style.width=s+'px';d.style.height=s+'px';
+  d.style.background='hsl('+(178+Math.random()*35)+',75%,65%)';
+  d.style.animationDuration=(2+Math.random()*4)+'s';
+  d.style.animationDelay=(Math.random()*5)+'s';
+  bio.appendChild(d);
+}
+
+// TICKER
+const words=['Marketing','Communication','Luxury','Fashion & Design','Project Coordination','Creative Strategy','Brand Storytelling','Event Logistics','Digital Content','Lausanne — Paris'];
+const track=document.getElementById('ticker');
+const tc=words.map(t=>'<span>'+t+'</span><span class="ticker-sep"> ✦ </span>').join('');
+track.innerHTML=tc+tc;
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.1});
+document.querySelectorAll('.reveal,.receipt,.bp').forEach(el=>obs.observe(el));
+const photoObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.15});
+document.querySelectorAll('.who-photo-col').forEach(el=>photoObs.observe(el));
+
+// KIFFS GALLERY
+let kCurrent=null;
+window.kToggle=function(col){if(col.classList.contains('open'))return;if(kCurrent&&kCurrent!==col)kClose(kCurrent);col.classList.remove('closed');col.classList.add('open');kCurrent=col;};
+window.kClose=function(col){col.classList.remove('open');col.classList.add('closed');if(kCurrent===col)kCurrent=null;};
+
+// DOT GRID
+(function(){
+  const canvas=document.getElementById('dot-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const sep=document.getElementById('dot-grid-sep');
+  let W,H,dots=[],mouse={x:-9999,y:-9999};
+  const SPACING=28,RADIUS=1.2,INFLUENCE=130,MAX_SCALE=6;
+  function resize(){
+    const rect=sep.getBoundingClientRect();
+    W=canvas.width=rect.width*window.devicePixelRatio;
+    H=canvas.height=rect.height*window.devicePixelRatio;
+    canvas.style.width=rect.width+'px';canvas.style.height=rect.height+'px';
+    ctx.scale(window.devicePixelRatio,window.devicePixelRatio);
+    dots=[];const pw=rect.width,ph=rect.height;
+    for(let x=SPACING/2;x<pw;x+=SPACING)for(let y=SPACING/2;y<ph;y+=SPACING)dots.push({x,y,scale:1});
+  }
+  function draw(){
+    const rect=sep.getBoundingClientRect();ctx.clearRect(0,0,rect.width,rect.height);
+    for(const d of dots){
+      const dx=mouse.x-d.x,dy=mouse.y-d.y,dist=Math.sqrt(dx*dx+dy*dy);
+      const factor=Math.max(0,1-dist/INFLUENCE);
+      d.scale+=(1+factor*(MAX_SCALE-1)-d.scale)*.14;
+      const r=RADIUS*d.scale,goldAmt=factor,alpha=.22+factor*.7;
+      const red=Math.round(181*goldAmt+255*(1-goldAmt)),green=Math.round(147*goldAmt+255*(1-goldAmt)),blue=Math.round(90*goldAmt+255*(1-goldAmt));
+      ctx.beginPath();ctx.arc(d.x,d.y,r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${red},${green},${blue},${alpha})`;ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  sep.addEventListener('mousemove',e=>{const rect=sep.getBoundingClientRect();mouse.x=e.clientX-rect.left;mouse.y=e.clientY-rect.top;});
+  sep.addEventListener('mouseleave',()=>{mouse.x=-9999;mouse.y=-9999;});
+  resize();window.addEventListener('resize',resize);draw();
+})();
+
+
+
+
+
+// NAV
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
+});
+</script>
+</body>
+</html>
+
