@@ -515,7 +515,7 @@ footer{background:var(--ink);padding:2.2rem 4rem;display:flex;justify-content:sp
   <div class="mp-status"><div class="mp-status-dot"></div><span class="mp-status-text" id="mp-status-txt">ready · hit play ✦</span></div>
 </div>
 
-<audio id="mp-audio"></audio>
+<audio id="mp-audio" preload="auto"></audio>
 <script>
 (function(){
   const mpSection = document.getElementById('music-player');
@@ -608,8 +608,11 @@ footer{background:var(--ink);padding:2.2rem 4rem;display:flex;justify-content:sp
       mpLoadTrack(mpCurrent, true); return;
     }
     if (mpAudio.paused) {
-      mpAudio.play().catch(function(){});
-      mpSetPlaying(true);
+      mpAudio.play().then(function(){ mpSetPlaying(true); }).catch(function(err){
+        var codes={1:'ABORTED',2:'NETWORK',3:'DECODE',4:'NOT_SUPPORTED'};
+        var msg = mpAudio.error ? (codes[mpAudio.error.code]||mpAudio.error.code) : err.name;
+        mpStatusTxt.textContent = 'Error: ' + msg + ' — ' + mpAudio.src.split('/').pop();
+      });
     } else {
       mpAudio.pause();
       mpSetPlaying(false);
